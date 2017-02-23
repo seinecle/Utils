@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class Lemmatizer {
 
-    private String[] noLemmaEN = new String[]{"accumbens", "addresses", "alors", "always", "approaches", "analytics", "analyses", "bayes", "biases", "charles", "classes", "cowles", "discusses", "economics", "ethics", "focuses", "forbes", "fries", "goes", "humanities", "hypotheses", "james", "afterwards", "inches", "keynes", "koopmans", "lies", "losses", "physics", "politics", "processes", "ries", "series", "sometimes", "species", "status", "themselves", "united states", "neural processes", "humanities", "witnesses"};
+    private String[] noLemmaEN = new String[]{"accumbens", "addresses", "afterwards", "always", "approaches", "analytics", "analyses", "bayes", "biases", "businesses","charles", "classes", "cowles", "crises","discusses", "ethics", "focuses", "forbes", "fries", "goes", "humanities", "hypotheses", "james", "inches", "keynes", "koopmans", "lies", "losses", "physics", "politics", "processes", "ries", "series", "sometimes", "species", "status", "themselves", "united states", "neural processes", "humanities", "witnesses"};
 
     private String[] noLemmaFR = new String[]{"ects", "cours", "sens","puis","temps","parcours","près","auprès","outils","travers","pays","concours","êtes","divers","éthos","ethos","alors","corps","ouvrirons","univers"};
     
@@ -53,6 +53,7 @@ public class Lemmatizer {
                 && !currEntry.endsWith("us")
                 && !currEntry.endsWith("as")
                 && !currEntry.endsWith("ss")
+                && !currEntry.endsWith("ies")
                 && !noLemmaSet.contains(currEntry)
                 && !currEntry.endsWith("is")) {
             if (currEntry.endsWith("s")) {

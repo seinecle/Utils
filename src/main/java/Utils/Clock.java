@@ -30,38 +30,26 @@ public class Clock {
 
         start = System.currentTimeMillis();
         logText.append(action).append("...").append(newLine);
-//        Screen1.logArea.setText(Screen1.logArea.getText().concat(logText.toString()));
-//        Screen1.logArea.setCaretPosition(Screen1.logArea.getText().length());
-
-        //GUI_Screen_1.logArea.repaint();
 
         System.out.print(logText.toString());
     }
 
-    public void addText(String it) {
+    public void printIntermediaryText(String it) {
         intermediateText.append(it).append(newLine);
-    }
-
-    public void printText() {
-        System.out.println(logText.toString());
-        logText = new StringBuilder();
+        System.out.println(intermediateText.toString());
         intermediateText = new StringBuilder();
-
-//        Screen1.logArea.setText(Screen1.logArea.getText().concat(logText.toString()));
-//        Screen1.logArea.setCaretPosition(Screen1.logArea.getText().length());
     }
 
     public void printElapsedTime() {
-
         long currentTime = System.currentTimeMillis();
         long elapsedTime = currentTime - start;
 
         if (elapsedTime
                 < 1000) {
-            System.out.println("still " + action.toLowerCase() + ", " + elapsedTime + " milliseconds]");
+            System.out.println("still " + action.toLowerCase() + ", elapsed time: " + elapsedTime + " milliseconds]");
 
         } else {
-            System.out.println("still " + action.toLowerCase() + ", " + elapsedTime / 1000 + " seconds]");
+            System.out.println("still " + action.toLowerCase() + ", elapsed time: " + elapsedTime / 1000 + " seconds]");
         }
 
     }
@@ -88,8 +76,6 @@ public class Clock {
         }
 
         System.out.println(logText.toString());
-//        Screen1.logArea.setText(Screen1.logArea.getText().concat(logText.toString()));
-//        Screen1.logArea.setCaretPosition(Screen1.logArea.getText().length());
 
     }
 }
