@@ -1,0 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package net.clementlevallois.utils;
+
+/**
+ *
+ * @author C. Levallois
+ */
+import java.util.*;
+import java.util.stream.Collectors;
+
+// source: https://stackoverflow.com/a/23846961/798502
+public class MapUtils {
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortAscendingByValue(Map<K, V> map, int topElementsToKeep) {
+        return map.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Collections.reverseOrder()))
+                .limit(topElementsToKeep)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
+    }
+}
