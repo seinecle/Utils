@@ -9,7 +9,9 @@ package net.clementlevallois.utils;
  *
  * @author C. Levallois
  */
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 // source: https://stackoverflow.com/a/23846961/798502

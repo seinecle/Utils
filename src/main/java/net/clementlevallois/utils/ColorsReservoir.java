@@ -49,16 +49,16 @@ public class ColorsReservoir {
 
     public static void fillReservoir() {
         reservoir = new ArrayList();
-        reservoir.add("#305100");
+        reservoir.add("#5E9421");
         reservoir.add("#560DE4");
         reservoir.add("#F81D6E");
         reservoir.add("#4FB1F4");
         reservoir.add("#16EF00");
         reservoir.add("#FE9617");
         reservoir.add("#320E41");
-        reservoir.add("#F5F4C0");
+        reservoir.add("#CAC713");
         reservoir.add("#F90CD0");
-        reservoir.add("#EAF643");
+        reservoir.add("#9AC9CA");
         reservoir.add("#762006");
         reservoir.add("#009082");
         reservoir.add("#2B56CE");

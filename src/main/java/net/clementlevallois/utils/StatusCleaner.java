@@ -4,11 +4,10 @@
  */
 package net.clementlevallois.utils;
 
-import com.google.common.collect.Multiset;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.commons.lang3.StringUtils;
 
 public class StatusCleaner {
 
@@ -44,12 +43,18 @@ public class StatusCleaner {
     }
 
     public static String detachCamelCaseWordsAndPutInLowerCase(String string) {
+        if (string.contains("LeMonde") || string.contains("PhD")) {
+            return string;
+        }
         StringBuilder sb = new StringBuilder();
         int countChar = 0;
+        String currentChar;
+        String previousChar;
         for (char c : string.toCharArray()) {
             //if the character is uppercase, and is not preceded by an uppercase, then introduce a space before it
             if (Character.isUpperCase(c) && (countChar > 0 && !Character.isUpperCase(string.charAt(countChar - 1)))) {
-                sb.append(" ");
+                currentChar = String.valueOf(c);
+                previousChar = String.valueOf(string.charAt(countChar - 1));
             }
             sb.append(c);
             countChar++;
@@ -59,9 +64,9 @@ public class StatusCleaner {
 
     public static Multiset<String> removeSmallWords(Multiset<String> terms, int lessOrEqualToNumber) {
 
-        Iterator<String> it = terms.iterator();
+        Iterator<Map.Entry<String,Integer>> it = terms.getEntrySet().iterator();
         while (it.hasNext()) {
-            String string = it.next();
+            String string = it.next().getKey();
             if (string.length() < lessOrEqualToNumber | string.matches(".*\\d.*")) {
                 it.remove();
             }
@@ -91,18 +96,16 @@ public class StatusCleaner {
     }
 
     public static String removeStartAndFinalApostrophs(String string) {
-        string = StringUtils.removeEnd(string, "'s");
-        string = StringUtils.removeEnd(string, "’s");
-        string = string.replace("'s", " ");
-        string = string.replace("’s", " ");
-        string = string.replace("l'", " ");
-        string = string.replace("l’", " ");
+        string = string.endsWith("'s") ? string.substring(0, string.lastIndexOf("'s")) : string;
+        string = string.endsWith("’s") ? string.substring(0, string.lastIndexOf("’s")) : string;
+        string = string.replaceAll("l'", " ");
+        string = string.replaceAll("l’", " ");
 
         return string.trim();
     }
 
     public static String normalizeApostrophs(String string) {
-        string = StringUtils.replace(string, "’", "'");
+        string = string.replaceAll("’", "'");
         return string;
     }
 
@@ -113,9 +116,9 @@ public class StatusCleaner {
 
     public static Multiset<String> removeSmallWordsOrNumeric(Multiset<String> terms, int maxLetters) {
 
-        Iterator<String> it = terms.iterator();
+        Iterator<Map.Entry<String,Integer>> it = terms.getEntrySet().iterator();
         while (it.hasNext()) {
-            String string = it.next();
+            String string = it.next().getKey();
             if (string.length() < maxLetters | string.matches(".*\\d.*")) {
                 it.remove();
             }
@@ -136,11 +139,14 @@ public class StatusCleaner {
     }
 
     public static String removedXmlEscaped(String input) {
-        String cleaned = StringUtils.replace(input, "&gt;", " ");
-        cleaned = StringUtils.replace(cleaned, "&lt;", " ");
-        cleaned = StringUtils.replace(cleaned, "&amp;", " ");
-        cleaned = StringUtils.replace(cleaned, "&apos;", " ");
-        cleaned = StringUtils.replace(cleaned, "&quot;", " ");
+        if (input == null) {
+            return input;
+        }
+        String cleaned = input.replaceAll("&gt;", " ");
+        cleaned = input.replaceAll("&lt;", " ");
+        cleaned = input.replaceAll("&amp;", " ");
+        cleaned = input.replaceAll("&apos;", " ");
+        cleaned = input.replaceAll("&quot;", " ");
         return cleaned;
     }
 

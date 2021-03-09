@@ -4,7 +4,6 @@
  */
 package net.clementlevallois.utils;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,8 +15,8 @@ import java.util.TreeSet;
 public class findAllPairsAuthorsInSet {
 
     static public TreeSet<DirectedPair<Author, Author>> getAllPairs(Set<Author> setAuthorsInHere) {
-        Set<Author> setAuthorsProcessed = new TreeSet<Author>();
-        TreeSet<DirectedPair<Author, Author>> setPairs = new TreeSet<DirectedPair<Author, Author>>();
+        Set<Author> setAuthorsProcessed = new TreeSet();
+        TreeSet<DirectedPair<Author, Author>> setPairs = new TreeSet();
         Iterator<Author> setAuthorsIteratorA = setAuthorsInHere.iterator();
         Iterator<Author> setAuthorsIteratorB;
         Author currAuthorA;

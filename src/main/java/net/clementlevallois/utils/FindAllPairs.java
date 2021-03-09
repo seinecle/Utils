@@ -5,11 +5,12 @@
 package net.clementlevallois.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -90,12 +91,12 @@ public class FindAllPairs<T extends Comparable<? super T>> {
         return setPairs;
     }
 
-    public List<Pair<T>> getAllUndirectedPairsAsList(Set<T> setObjects) {
+    public List<Map<String,T>> getAllUndirectedPairsAsList(Set<T> setObjects) {
 //        Clock findingAllPairsClock = new Clock("finding all pairs in a set of "+setObjects.size()+" objects");
         List<T> listObjects = new ArrayList();
         listObjects.addAll(setObjects);
 
-        List<Pair<T>> listPairs = new ArrayList();
+        List<Map<String,T>> listPairs = new ArrayList();
         Iterator<T> listIterator1 = listObjects.listIterator();
         Iterator<T> listIterator2;
         int count = 1;
@@ -104,7 +105,10 @@ public class FindAllPairs<T extends Comparable<? super T>> {
             object1 = listIterator1.next();
             listIterator2 = listObjects.listIterator(count++);
             while (listIterator2.hasNext()) {
-                listPairs.add(new Pair(object1, listIterator2.next()));
+                Map<String, T> pair = new HashMap();
+                pair.put("left", object1);
+                pair.put("right",listIterator2.next());
+                listPairs.add(pair);
             }
         }
 //        System.out.println("number of pairs: "+listPairs.size());

@@ -11,7 +11,7 @@ package net.clementlevallois.utils;
 public class RemoveNonASCII {
 
     public static String remove(String input) {
-        input = removeAccents.deAccent(input);
+        input = RemoveAccents.deAccent(input);
         input = input.replaceAll("'", "");
         input = input.replaceAll("-", " ");
         return input.replaceAll("[^\\x00-\\x7F]", "");

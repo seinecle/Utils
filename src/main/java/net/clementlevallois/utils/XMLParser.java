@@ -8,7 +8,6 @@ package net.clementlevallois.utils;
  *
  * @author C. Levallois
  */
-import com.google.common.collect.HashMultimap;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,7 +45,7 @@ public class XMLParser extends DefaultHandler {
     private boolean newType;
     private boolean newText;
     
-    private HashMultimap<String,String> mapTypeToText = HashMultimap.create();
+//    private HashMultimap<String,String> mapTypeToText = HashMultimap.create();
 
     public XMLParser(InputSource is) throws IOException {
 

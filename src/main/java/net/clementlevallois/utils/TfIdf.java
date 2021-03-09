@@ -5,8 +5,6 @@
  */
 package net.clementlevallois.utils;
 
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,9 +20,9 @@ public class TfIdf {
 
         Map<String, Map<String, Float>> result = new TreeMap();
         
-        Multiset<String> termsCount = HashMultiset.create();
+        Multiset<String> termsCount = new Multiset();
         for (Entry<String,Multiset<String>> entry : categoriesToTerms.entrySet()) {
-            termsCount.addAll(entry.getValue());
+            termsCount.addAllFromMultiset(entry.getValue());
         }
 
         Multiset<String> termsPerCategory;
@@ -32,10 +30,10 @@ public class TfIdf {
         for (String category : categoriesToTerms.keySet()) {
             termsPerCategory = categoriesToTerms.get(category);
             termsPerCategoryAndTheirRelativeFrequencies = new HashMap();
-            for (Multiset.Entry<String> entry : termsPerCategory.entrySet()) {
-                int countTermInThisCategory = entry.getCount();
-                float relativeFrequency = (float) (Math.pow(countTermInThisCategory, 1.5) / Math.max(1, termsCount.count(entry.getElement()) - countTermInThisCategory));
-                termsPerCategoryAndTheirRelativeFrequencies.put(entry.getElement(), relativeFrequency);
+            for (Entry<String,Integer> entry : termsPerCategory.getEntrySet()) {
+                int countTermInThisCategory = entry.getValue();
+                float relativeFrequency = (float) (Math.pow(countTermInThisCategory, 1.5) / Math.max(1, termsCount.getCount(entry.getKey()) - countTermInThisCategory));
+                termsPerCategoryAndTheirRelativeFrequencies.put(entry.getKey(), relativeFrequency);
             }
             result.put(category, termsPerCategoryAndTheirRelativeFrequencies);
         }

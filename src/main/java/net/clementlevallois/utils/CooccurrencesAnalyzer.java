@@ -4,8 +4,6 @@
  */
 package net.clementlevallois.utils;
 
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -82,7 +80,7 @@ public class CooccurrencesAnalyzer<L extends Comparable<? super L>, R extends Co
 
     public Set<Edge> returnSetEdgesDirected() {
         Clock getAllDirectedPairsClock = new Clock("getting all directed pairs of mentions");
-        Multiset<Edge> multisetEdges = HashMultiset.create();
+        Multiset<Edge> multisetEdges = new Multiset();
         Set<Edge> setEdges = new HashSet();
         Set<DirectedPair> currSetEdges;
         Iterator<UnDirectedPair<L>> inputValuesIterator = inputDirected.values().iterator();
@@ -99,14 +97,14 @@ public class CooccurrencesAnalyzer<L extends Comparable<? super L>, R extends Co
             currSetEdgesIterator = currSetEdges.iterator();
             while (currSetEdgesIterator.hasNext()) {
                 pair = currSetEdgesIterator.next();
-                multisetEdges.add(new Edge((String) pair.getLeft(), (String) pair.getRight(), true));
+                multisetEdges.addOne(new Edge((String) pair.getLeft(), (String) pair.getRight(), true));
             }
         }
-        Iterator<Edge> multisetEdgesIterator = multisetEdges.elementSet().iterator();
+        Iterator<Edge> multisetEdgesIterator = multisetEdges.getElementSet().iterator();
         Edge edge;
         while (multisetEdgesIterator.hasNext()) {
             edge = multisetEdgesIterator.next();
-            edge.setWeight(multisetEdges.count(edge));
+            edge.setWeight(multisetEdges.getCount(edge));
             setEdges.add(edge);
         }
 

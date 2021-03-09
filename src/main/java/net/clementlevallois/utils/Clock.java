@@ -11,12 +11,12 @@ package net.clementlevallois.utils;
 public class Clock {
 
     private long start;
-    private String action;
+    private final String action;
     private StringBuilder logText;
     private StringBuilder intermediateText;
     private final String newLine = "\n";
     private final String interval = "-------------------------------\n\n";
-    public static boolean silent = false;
+    public boolean silent = false;
 
     public Clock(String action) {
 
@@ -29,13 +29,16 @@ public class Clock {
     }
 
     public Clock(String action, boolean startSilent) {
-
         this.action = action;
         intermediateText = new StringBuilder();
         logText = new StringBuilder();
-        if (!silent) {
-            startClock(startSilent);
-        }
+        startClock(startSilent);
+    }
+
+    public Clock(String action, Output useTheOutputEnum) {
+        this.action = action;
+        intermediateText = new StringBuilder();
+        logText = new StringBuilder();
     }
 
     private void startClock(boolean startSilent) {
@@ -47,10 +50,22 @@ public class Clock {
         }
     }
 
+    public String startClockToString() {
+        start = System.currentTimeMillis();
+        logText.append(action).append("...").append(newLine);
+        return logText.toString();
+    }
+
     public void printIntermediaryText(String it) {
         intermediateText.append(it).append(newLine);
         System.out.println(intermediateText.toString());
         intermediateText = new StringBuilder();
+    }
+
+    public String printIntermediaryTextToString(String it) {
+        intermediateText = new StringBuilder();
+        intermediateText.append(it).append(newLine);
+        return intermediateText.toString();
     }
 
     public long getElapsedTime() {
@@ -59,59 +74,61 @@ public class Clock {
     }
 
     public void printElapsedTime() {
+        System.out.println(computeElapsedTime());
+    }
+
+    public String printElapsedTimeTostring() {
+        return computeElapsedTime();
+    }
+
+    private String computeElapsedTime() {
+        StringBuilder sb = new StringBuilder();
         long currentTime = System.currentTimeMillis();
         long elapsedTime = currentTime - start;
 
         if (elapsedTime < 10000) {
-            logText.append(Math.round(elapsedTime / 1000))
-                    .append(" seconds, ")
-                    .append(Math.round(elapsedTime % 1000))
-                    .append(" milliseconds]")
-                    .append(newLine + interval);
+            int seconds = Math.round(elapsedTime / 1000);
+            if (seconds != 0) {
+                sb.append(String.valueOf(seconds))
+                        .append(" seconds, ");
+            }
+            sb.append(Math.round(elapsedTime % 1000))
+                    .append(" milliseconds");
         } else if (elapsedTime < 60000) {
-            logText.append(elapsedTime / 1000).append(" seconds").append(newLine + interval);
+            sb.append(elapsedTime / 1000).append(" seconds");
         } else {
-            logText.append(elapsedTime / 60000).append(" minutes ").append(Math.round((elapsedTime % 60000) / 1000)).append(" seconds").append(newLine + interval);
+            sb.append(elapsedTime / 60000).append(" minutes ").append(Math.round((elapsedTime % 60000) / 1000)).append(" seconds");
         }
-
-        if (elapsedTime
-                < 1000) {
-            System.out.println(action.toLowerCase() + ", elapsed time: " + elapsedTime + " milliseconds]");
-
-        } else {
-            System.out.println(action.toLowerCase() + ", elapsed time: " + elapsedTime / 1000 + " seconds]");
-        }
-
+        return sb.toString();
     }
 
     public void closeAndPrintClock() {
-        closeAndPrintClock("");
-
+        System.out.println(writeLogTextClosing(""));
     }
 
     public void closeAndPrintClock(String closingMessage) {
+        System.out.println(writeLogTextClosing(closingMessage));
+    }
+
+    public String closeAndPrintClockToString(String closingMessage) {
+        return writeLogTextClosing(closingMessage);
+    }
+
+    private String writeLogTextClosing(String closingMessage) {
         if (!silent) {
-
-            long currentTime = System.currentTimeMillis();
-            long totalTime = currentTime - start;
             logText = new StringBuilder();
-            logText.append(intermediateText.toString());
-            logText.append(closingMessage + newLine);
-            logText.append("finished " + action + ". Duration: ");
-
-            if (totalTime < 10000) {
-                logText.append(Math.round(totalTime / 1000))
-                        .append(" seconds, ")
-                        .append(Math.round(totalTime % 1000))
-                        .append(" milliseconds]")
-                        .append(newLine + interval);
-            } else if (totalTime < 60000) {
-                logText.append(totalTime / 1000).append(" seconds").append(newLine + interval);
-            } else {
-                logText.append(totalTime / 60000).append(" minutes ").append(Math.round((totalTime % 60000) / 1000)).append(" seconds").append(newLine + interval);
-            }
-
-            System.out.println(logText.toString());
+            logText.append(closingMessage)
+            .append(newLine)
+            .append("finished ")
+            .append(action)
+            .append(". [Duration: ")
+            .append(computeElapsedTime())
+            .append("]");
         }
+        return logText.toString();
+    }
+
+    public String getAction() {
+        return action;
     }
 }
