@@ -15,15 +15,16 @@ import java.util.TreeSet;
 
 /**
  *
- * C. Levallois
+ * C.Levallois
+ * @param <T>
  */
 public class FindAllPairs<T extends Comparable<? super T>> {
 
     private T t;
 
     public Set<DirectedPair<T, T>> getAllDirectedPairs(Set<T> setObjects) {
-        Set<T> setObjectsProcessed = new HashSet<T>();
-        Set<DirectedPair<T, T>> setPairs = new HashSet<DirectedPair<T, T>>();
+        Set<T> setObjectsProcessed = new HashSet();
+        Set<DirectedPair<T, T>> setPairs = new HashSet();
         Iterator<T> setObjectsIteratorA = setObjects.iterator();
         Iterator<T> setObjectsIteratorB;
         T currTA;
@@ -80,6 +81,34 @@ public class FindAllPairs<T extends Comparable<? super T>> {
         while (setObjectsIteratorA.hasNext()) {
             currTA = setObjectsIteratorA.next();
             setObjectsIteratorB = setObjects.iterator();
+            while (setObjectsIteratorB.hasNext()) {
+                currTB = setObjectsIteratorB.next();
+                if (!setObjectsProcessed.contains(currTB) && !currTA.equals(currTB)) {
+                    setPairs.add(new UnDirectedPair(currTA, currTB));
+                }
+            }
+            setObjectsProcessed.add(currTA);
+        }
+        return setPairs;
+    }
+
+    public Set<UnDirectedPair<T>> getAllUndirectedPairsFromList(List<T> listObjects) {
+        Set<UnDirectedPair<T>> setPairs;
+        setPairs = new HashSet();
+        if (listObjects.size() < 2) {
+            return setPairs;
+        }
+
+        Set<T> setObjectsProcessed = new HashSet();
+
+        Iterator<T> setObjectsIteratorA = listObjects.iterator();
+        Iterator<T> setObjectsIteratorB;
+        T currTA;
+        T currTB;
+
+        while (setObjectsIteratorA.hasNext()) {
+            currTA = setObjectsIteratorA.next();
+            setObjectsIteratorB = listObjects.iterator();
             while (setObjectsIteratorB.hasNext()) {
                 currTB = setObjectsIteratorB.next();
                 if (!setObjectsProcessed.contains(currTB) && !currTA.equals(currTB)) {

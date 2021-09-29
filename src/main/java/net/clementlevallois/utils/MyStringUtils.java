@@ -22,6 +22,13 @@ public class MyStringUtils {
         return true;
     }
 
+    /**
+     *
+     * @param str
+     * @param substr
+     * @param n
+     * @return
+     */
     public static int ordinalIndexOf(String str, String substr, int n) {
         int pos = str.indexOf(substr);
         while (--n > 0 && pos != -1) {
@@ -41,7 +48,7 @@ public class MyStringUtils {
                 out[j++] = c;
             }
         }
-        return new String(out);
+        return new String(out,0,j);
     }
 
 }

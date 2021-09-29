@@ -32,6 +32,7 @@ public class TfIdf {
             termsPerCategoryAndTheirRelativeFrequencies = new HashMap();
             for (Entry<String,Integer> entry : termsPerCategory.getEntrySet()) {
                 int countTermInThisCategory = entry.getValue();
+                // count of the word in this doc  / Max (1, count total du term across docs - count du term in this doc)
                 float relativeFrequency = (float) (Math.pow(countTermInThisCategory, 1.5) / Math.max(1, termsCount.getCount(entry.getKey()) - countTermInThisCategory));
                 termsPerCategoryAndTheirRelativeFrequencies.put(entry.getKey(), relativeFrequency);
             }

@@ -4,16 +4,18 @@
  */
 package net.clementlevallois.utils;
 
+import java.text.Normalizer;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StatusCleaner {
 
-    private static Pattern p = Pattern.compile(":(.*?):");
-
-    public static String clean(String status) {
+    public String clean(String status) {
         if (status == null) {
             return "";
         }
@@ -22,18 +24,17 @@ public class StatusCleaner {
         status = status.replace("..", " ");
 //            System.out.println(status);
         status = status.replaceAll("http[^ ]*", " ");
-//        status = status.replaceAll("\".*\"", " ");
         status = status.replaceAll("http.*[\r|\n]*", " ");
         status = status.replaceAll(" +", " ");
 
         return status;
     }
 
-    public static String removePunctuationSigns(String string) {
+    public String removePunctuationSigns(String string) {
         if (string == null) {
             return "";
         }
-        String punctuation = "!?.@'’`+<>\"«»:-+,|$;_/~&()[]{}#=*";
+        String punctuation = "!?.@'’`+<>\"«»:-“”—+,|$;_/~&()[]{}#=*";
 
         char[] chars = punctuation.toCharArray();
         for (char currChar : chars) {
@@ -41,8 +42,9 @@ public class StatusCleaner {
         }
         return string.trim();
     }
-
-    public static String detachCamelCaseWordsAndPutInLowerCase(String string) {
+    
+    
+    public String detachCamelCaseWordsAndPutInLowerCase(String string) {
         if (string.contains("LeMonde") || string.contains("PhD")) {
             return string;
         }
@@ -62,20 +64,19 @@ public class StatusCleaner {
         return sb.toString();
     }
 
-    public static Multiset<String> removeSmallWords(Multiset<String> terms, int lessOrEqualToNumber) {
+    public Multiset<String> removeSmallWords(Multiset<String> terms, int lessOrEqualToNumber) {
 
-        Iterator<Map.Entry<String,Integer>> it = terms.getEntrySet().iterator();
+        Iterator<Map.Entry<String, Integer>> it = terms.getEntrySet().iterator();
         while (it.hasNext()) {
             String string = it.next().getKey();
-            if (string.length() < lessOrEqualToNumber | string.matches(".*\\d.*")) {
+            if (string.length() < lessOrEqualToNumber) {
                 it.remove();
             }
         }
         return terms;
-
     }
 
-    public static boolean shouldItBeRemoved(String string, int lessOrEqualToNumber) {
+    public boolean shouldItBeRemoved(String string, int lessOrEqualToNumber) {
 
         if (string.trim().length() < lessOrEqualToNumber | string.matches(".*\\d.*")) {
             return true;
@@ -85,7 +86,7 @@ public class StatusCleaner {
 
     }
 
-    public static String removeUrls(String status) {
+    public String removeUrls(String status) {
 //            System.out.println(status);
         status = status.replaceAll("http[^ ]*", " ");
 //        status = status.replaceAll("\".*\"", " ");
@@ -95,28 +96,44 @@ public class StatusCleaner {
         return status;
     }
 
-    public static String removeStartAndFinalApostrophs(String string) {
+    public String removeStartAndFinalApostrophs(String string) {
+        string = string.replaceAll("’", "'");
         string = string.endsWith("'s") ? string.substring(0, string.lastIndexOf("'s")) : string;
-        string = string.endsWith("’s") ? string.substring(0, string.lastIndexOf("’s")) : string;
         string = string.replaceAll("l'", " ");
-        string = string.replaceAll("l’", " ");
-
+        string = string.replaceAll("d'", " ");
+        string = string.replaceAll("m'", " ");
+        string = string.replaceAll("t'", " ");
+        string = string.replaceAll("j'", " ");
+        string = string.replaceAll("c'", " ");
+        string = string.replaceAll("n'", " ");
+        string = string.replaceAll("s'", " ");
         return string.trim();
     }
 
-    public static String normalizeApostrophs(String string) {
+    public String normalizeApostrophs(String string) {
         string = string.replaceAll("’", "'");
         return string;
     }
 
-    public static String removeTermsBetweenQuotes(String string) {
-        string = string.replaceAll("\".*?\"", "");
+    public String removeTermsBetweenQuotes(String string) {
+        string = string.replaceAll("\".*?\"", " ");
+        string = string.replaceAll("«.*?»", " ");
+        string = string.replaceAll("“.*?”", " ");
         return string.trim();
     }
 
-    public static Multiset<String> removeSmallWordsOrNumeric(Multiset<String> terms, int maxLetters) {
+    public boolean isItCleaned(String status) {
+        if (status.contains("\"")) {
+            String s1 = status.replaceFirst("\"", "");
+            return !s1.contains("\"");
+        } else {
+            return true;
+        }
+    }
 
-        Iterator<Map.Entry<String,Integer>> it = terms.getEntrySet().iterator();
+    public Multiset<String> removeSmallWordsOrNumeric(Multiset<String> terms, int maxLetters) {
+
+        Iterator<Map.Entry<String, Integer>> it = terms.getEntrySet().iterator();
         while (it.hasNext()) {
             String string = it.next().getKey();
             if (string.length() < maxLetters | string.matches(".*\\d.*")) {
@@ -126,39 +143,107 @@ public class StatusCleaner {
         return terms;
     }
 
-    public static String removeNumeric(String string) {
+    public String removeNumeric(String string) {
         return string.replaceAll("[\\d]", "");
     }
 
-    public static String removeHashtags(String status) {
+    public String removeHashtags(String status) {
         return status.replaceAll("#\\p{L}+", "");
     }
 
-    public static String putInLowerCase(String input) {
+    public String putInLowerCase(String input) {
         return input.toLowerCase();
     }
 
-    public static String removedXmlEscaped(String input) {
+    public String removedXmlEscaped(String input) {
         if (input == null) {
             return input;
         }
         String cleaned = input.replaceAll("&gt;", " ");
-        cleaned = input.replaceAll("&lt;", " ");
-        cleaned = input.replaceAll("&amp;", " ");
-        cleaned = input.replaceAll("&apos;", " ");
-        cleaned = input.replaceAll("&quot;", " ");
+        cleaned = cleaned.replaceAll("&lt;", " ");
+        cleaned = cleaned.replaceAll("&amp;", " ");
+        cleaned = cleaned.replaceAll("&apos;", " ");
+        cleaned = cleaned.replaceAll("&quot;", " ");
         return cleaned;
     }
 
-    public static String removeEmojisBetweenSemiColons(String cleaned) {
+    public String removeEmojisBetweenSemiColons(String cleaned) {
+        Pattern p = Pattern.compile(":(.*?):");
         int count = cleaned.length() - cleaned.replace(":", "").length();
         if (count >= 2) {
             Matcher m = p.matcher(cleaned);
             while (m.find()) {
-                cleaned = cleaned.replace(m.group(1), " "); //is your string. do what you want
+                cleaned = cleaned.replace(m.group(1), " ");
             }
         }
         return cleaned;
+    }
+
+    public String removeNullChars(String string) {
+        char nulChar = Character.MIN_VALUE;
+        string = string.replaceAll(String.valueOf(nulChar), " ");
+        string = string.replaceAll("\0", "");
+        return string.trim();
+    }
+
+    // from https://stackoverflow.com/a/15191508/798502
+    public String flattenToAscii(String string) {
+        if (string == null || string.isBlank()) {
+            return string;
+        }
+        char[] out = new char[string.length()];
+        string = Normalizer.normalize(string, Normalizer.Form.NFD);
+        int j = 0;
+        for (int i = 0, n = string.length(); i < n; ++i) {
+            char c = string.charAt(i);
+            if (c <= '\u007F') {
+                out[j++] = c;
+            }
+        }
+        return new String(out, 0, j);
+    }
+
+    public static Map<Integer, String> doAllCleaningOps(Map<Integer, String> mapOfLines) {
+        Map<Integer, String> cleanedLines = new HashMap();
+        if (mapOfLines == null) {
+            return cleanedLines;
+        }
+
+        StatusCleaner statusCleaner = new StatusCleaner();
+        for (Map.Entry<Integer, String> entry : mapOfLines.entrySet()) {
+            String status = entry.getValue();
+            if (status == null) {
+                cleanedLines.put(entry.getKey(), "");
+                continue;
+            }
+            status = statusCleaner.removeUrls(status);
+            status = statusCleaner.normalizeApostrophs(status);
+            status = statusCleaner.removeNullChars(status);
+            status = status.replaceAll(" +", " ");
+            status = statusCleaner.removePunctuationSigns(status);
+            status = statusCleaner.flattenToAscii(status);
+            status = status.replaceAll(" +", " ");
+            cleanedLines.put(entry.getKey(), status);
+        }
+        return cleanedLines;
+    }
+
+    public static Set<String> doAllCleaningOps(Set<String> lines) {
+
+        Set<String> results = new HashSet();
+        if (lines == null) {
+            return results;
+        }
+        Map<Integer, String> map = new HashMap();
+        Integer count = 0;
+        for (String string : lines) {
+            map.put(count++, string);
+        }
+        Map<Integer, String> cleaned = doAllCleaningOps(map);
+        for (Map.Entry<Integer, String> entry : cleaned.entrySet()) {
+            results.add(entry.getValue());
+        }
+        return results;
     }
 
 }

@@ -12,6 +12,8 @@ import java.util.Set;
 /**
  *
  * @author C. Levallois
+ * @param <L>
+ * @param <R>
  */
 public class CooccurrencesAnalyzer<L extends Comparable<? super L>, R extends Comparable<R>> {
 

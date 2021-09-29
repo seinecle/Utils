@@ -27,11 +27,20 @@ public class Multiset<T> {
     private Map<T, Integer> internalMap;
     private final Comparator<Map.Entry<T, Integer>> byCountDesc;
     private final Comparator<Map.Entry<T, Integer>> byCountAsc;
+    private Integer maxElements = 10_000;
 
     public Multiset() {
         internalMap = new HashMap();
         byCountDesc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e2.getValue() - e1.getValue();
         byCountAsc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e1.getValue() - e2.getValue();
+
+    }
+
+    public Multiset(Integer maxElements) {
+        internalMap = new HashMap();
+        byCountDesc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e2.getValue() - e1.getValue();
+        byCountAsc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e1.getValue() - e2.getValue();
+        this.maxElements = maxElements;
 
     }
 
@@ -48,6 +57,17 @@ public class Multiset<T> {
     }
 
     public void addOne(T element) {
+        Integer preCount = internalMap.get(element);
+        if (preCount == null) {
+            preCount = 0;
+        }
+        internalMap.put(element, preCount + 1);
+    }
+
+    public void addOneWithLimitToMaxElements(T element) {
+        if (internalMap.size() >= maxElements) {
+            return;
+        }
         Integer preCount = internalMap.get(element);
         if (preCount == null) {
             preCount = 0;
@@ -147,12 +167,33 @@ public class Multiset<T> {
 
         Iterator<Map.Entry<T, Integer>> iterator = input.iterator();
 
-        int count = 0;
+        int count = 1;
         Map.Entry<T, Integer> object;
         while (iterator.hasNext()) {
             object = iterator.next();
             toReturn.add(object);
 
+            if (count == n) {
+                break;
+            }
+            count++;
+
+        }
+        return toReturn;
+    }
+
+    public Multiset<T> keepMostfrequent(Multiset<T> multiset, int n) {
+
+        Multiset<T> toReturn = new Multiset();
+        List<Map.Entry<T, Integer>> input = sortDesc(multiset);
+
+        Iterator<Map.Entry<T, Integer>> iterator = input.iterator();
+
+        int count = 1;
+        Map.Entry<T, Integer> object;
+        while (iterator.hasNext()) {
+            object = iterator.next();
+            toReturn.addSeveral(object.getKey(), object.getValue());
             if (count == n) {
                 break;
             }
@@ -199,6 +240,22 @@ public class Multiset<T> {
         }
         return list;
 
+    }
+
+    public void printTopRankedElements(int topRank) {
+        List<Entry<T, Integer>> sortDesckeepMostfrequent = this.sortDesckeepMostfrequent(this, topRank);
+        for (Map.Entry<T, Integer> entry : sortDesckeepMostfrequent) {
+            System.out.println(entry.toString());
+        }
+    }
+
+    public String topRankedElementsToString(int topRank) {
+        StringBuilder sb = new StringBuilder();
+        List<Entry<T, Integer>> sortDesckeepMostfrequent = this.sortDesckeepMostfrequent(this, topRank);
+        for (Map.Entry<T, Integer> entry : sortDesckeepMostfrequent) {
+            sb.append(entry.getKey()).append(" x ").append(entry.getValue()).append(", ");
+        }
+        return sb.substring(0, sb.length()-2);
     }
 
 }

@@ -1,5 +1,5 @@
 # Utils classes 
-These are a couple of helper java classes I often use in my projects. They are written with a preference for speed of execution. Here are some that you might find most useful:  
+No dependencies. These are a couple of helper java classes I often use in my projects. They are written with a preference for speed of execution. Here are some that you might find most useful:  
 
 
 ### Clock.java
