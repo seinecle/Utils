@@ -20,7 +20,11 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
 
     @Override
     public int hashCode() {
-        return left.hashCode() * right.hashCode();
+        int hashFirst = left.hashCode();
+        int hashSecond = right.hashCode();
+        int maxHash = Math.max(hashFirst, hashSecond);
+        int minHash = Math.min(hashFirst, hashSecond);
+        return minHash * 31 + maxHash;
     }
 
     @Override
