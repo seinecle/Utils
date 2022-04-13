@@ -38,7 +38,7 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
         UnDirectedPair pairo = (UnDirectedPair) o;
         return ((this.left.equals(pairo.getLeft())
                 & this.right.equals(pairo.getRight())) || (this.left.equals(pairo.getRight())
-                & this.right.equals(pairo)));
+                & this.right.equals(pairo.getLeft())));
     }
 
     @Override
