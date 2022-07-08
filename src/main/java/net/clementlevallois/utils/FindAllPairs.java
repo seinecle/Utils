@@ -67,7 +67,7 @@ public class FindAllPairs<T extends Comparable<? super T>> {
     public Set<UnDirectedPair<T>> getAllUndirectedPairs(Set<T> setObjects) {
         Set<UnDirectedPair<T>> setPairs;
         setPairs = new HashSet();
-        if (setObjects.size() < 2) {
+        if (setObjects == null || setObjects.size() < 2) {
             return setPairs;
         }
 

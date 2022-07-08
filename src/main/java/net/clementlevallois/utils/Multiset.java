@@ -92,6 +92,15 @@ public class Multiset<T> {
         }
     }
 
+    public void addAllFromMap(Map<T,Integer> map) {
+        Set<Entry<T, Integer>> entrySet = map.entrySet();
+        Iterator<Entry<T, Integer>> it = entrySet.iterator();
+        while (it.hasNext()) {
+            Entry<T, Integer> next = it.next();
+            addSeveral(next.getKey(), next.getValue());
+        }
+    }
+
     public void addAllFromListOrSet(Collection<T> list) {
         for (T o : list) {
             addOne(o);
@@ -157,6 +166,12 @@ public class Multiset<T> {
     public List<Map.Entry<T, Integer>> sortDesc(Multiset<T> multiset) {
         List<Map.Entry<T, Integer>> toReturn = new ArrayList(multiset.getEntrySet());
         Collections.sort(toReturn, byCountDesc);
+        return toReturn;
+    }
+
+    public List<Map.Entry<T, Integer>> sortAsc(Multiset<T> multiset) {
+        List<Map.Entry<T, Integer>> toReturn = new ArrayList(multiset.getEntrySet());
+        Collections.sort(toReturn, byCountAsc);
         return toReturn;
     }
 

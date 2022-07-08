@@ -13,9 +13,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StatusCleaner {
+public class TextCleaningOps {
 
-    public String clean(String status) {
+    public static String clean(String status) {
         if (status == null) {
             return "";
         }
@@ -30,7 +30,7 @@ public class StatusCleaner {
         return status;
     }
 
-    public String removePunctuationSigns(String string) {
+    public static String removePunctuationSigns(String string) {
         if (string == null) {
             return "";
         }
@@ -42,9 +42,8 @@ public class StatusCleaner {
         }
         return string.trim();
     }
-    
-    
-    public String detachCamelCaseWordsAndPutInLowerCase(String string) {
+
+    public static String detachCamelCaseWordsAndPutInLowerCase(String string) {
         if (string.contains("LeMonde") || string.contains("PhD")) {
             return string;
         }
@@ -64,7 +63,7 @@ public class StatusCleaner {
         return sb.toString();
     }
 
-    public Multiset<String> removeSmallWords(Multiset<String> terms, int lessOrEqualToNumber) {
+    public static Multiset<String> removeSmallWords(Multiset<String> terms, int lessOrEqualToNumber) {
 
         Iterator<Map.Entry<String, Integer>> it = terms.getEntrySet().iterator();
         while (it.hasNext()) {
@@ -76,7 +75,7 @@ public class StatusCleaner {
         return terms;
     }
 
-    public boolean shouldItBeRemoved(String string, int lessOrEqualToNumber) {
+    public static boolean shouldItBeRemoved(String string, int lessOrEqualToNumber) {
 
         if (string.trim().length() < lessOrEqualToNumber | string.matches(".*\\d.*")) {
             return true;
@@ -86,7 +85,7 @@ public class StatusCleaner {
 
     }
 
-    public String removeUrls(String status) {
+    public static String removeUrls(String status) {
 //            System.out.println(status);
         status = status.replaceAll("http[^ ]*", " ");
 //        status = status.replaceAll("\".*\"", " ");
@@ -96,7 +95,7 @@ public class StatusCleaner {
         return status;
     }
 
-    public String removeStartAndFinalApostrophs(String string) {
+    public static String removeStartAndFinalApostrophs(String string) {
         string = string.replaceAll("’", "'");
         string = string.endsWith("'s") ? string.substring(0, string.lastIndexOf("'s")) : string;
         string = string.replaceAll("l'", " ");
@@ -110,19 +109,19 @@ public class StatusCleaner {
         return string.trim();
     }
 
-    public String normalizeApostrophs(String string) {
+    public static String normalizeApostrophs(String string) {
         string = string.replaceAll("’", "'");
         return string;
     }
 
-    public String removeTermsBetweenQuotes(String string) {
+    public static String removeTermsBetweenQuotes(String string) {
         string = string.replaceAll("\".*?\"", " ");
         string = string.replaceAll("«.*?»", " ");
         string = string.replaceAll("“.*?”", " ");
         return string.trim();
     }
 
-    public boolean isItCleaned(String status) {
+    public static boolean isItCleaned(String status) {
         if (status.contains("\"")) {
             String s1 = status.replaceFirst("\"", "");
             return !s1.contains("\"");
@@ -131,7 +130,7 @@ public class StatusCleaner {
         }
     }
 
-    public Multiset<String> removeSmallWordsOrNumeric(Multiset<String> terms, int maxLetters) {
+    public static Multiset<String> removeSmallWordsOrNumeric(Multiset<String> terms, int maxLetters) {
 
         Iterator<Map.Entry<String, Integer>> it = terms.getEntrySet().iterator();
         while (it.hasNext()) {
@@ -143,19 +142,19 @@ public class StatusCleaner {
         return terms;
     }
 
-    public String removeNumeric(String string) {
+    public static String removeNumeric(String string) {
         return string.replaceAll("[\\d]", "");
     }
 
-    public String removeHashtags(String status) {
+    public static String removeHashtags(String status) {
         return status.replaceAll("#\\p{L}+", "");
     }
 
-    public String putInLowerCase(String input) {
+    public static String putInLowerCase(String input) {
         return input.toLowerCase();
     }
 
-    public String removedXmlEscaped(String input) {
+    public static String removedXmlEscaped(String input) {
         if (input == null) {
             return input;
         }
@@ -167,7 +166,7 @@ public class StatusCleaner {
         return cleaned;
     }
 
-    public String removeEmojisBetweenSemiColons(String cleaned) {
+    public static String removeEmojisBetweenSemiColons(String cleaned) {
         Pattern p = Pattern.compile(":(.*?):");
         int count = cleaned.length() - cleaned.replace(":", "").length();
         if (count >= 2) {
@@ -179,7 +178,7 @@ public class StatusCleaner {
         return cleaned;
     }
 
-    public String removeNullChars(String string) {
+    public static String removeNullChars(String string) {
         char nulChar = Character.MIN_VALUE;
         string = string.replaceAll(String.valueOf(nulChar), " ");
         string = string.replaceAll("\0", "");
@@ -187,7 +186,7 @@ public class StatusCleaner {
     }
 
     // from https://stackoverflow.com/a/15191508/798502
-    public String flattenToAscii(String string) {
+    public static String flattenToAscii(String string) {
         if (string == null || string.isBlank()) {
             return string;
         }
@@ -209,23 +208,38 @@ public class StatusCleaner {
             return cleanedLines;
         }
 
-        StatusCleaner statusCleaner = new StatusCleaner();
         for (Map.Entry<Integer, String> entry : mapOfLines.entrySet()) {
             String status = entry.getValue();
             if (status == null) {
                 cleanedLines.put(entry.getKey(), "");
                 continue;
             }
-            status = statusCleaner.removeUrls(status);
-            status = statusCleaner.normalizeApostrophs(status);
-            status = statusCleaner.removeNullChars(status);
+            status = TextCleaningOps.removeUrls(status);
+            status = TextCleaningOps.normalizeApostrophs(status);
+            status = TextCleaningOps.removeNullChars(status);
             status = status.replaceAll(" +", " ");
-            status = statusCleaner.removePunctuationSigns(status);
-            status = statusCleaner.flattenToAscii(status);
+            status = TextCleaningOps.removePunctuationSigns(status);
+            status = TextCleaningOps.flattenToAscii(status);
             status = status.replaceAll(" +", " ");
             cleanedLines.put(entry.getKey(), status);
         }
         return cleanedLines;
+    }
+
+    public static String doAllCleaningOps(String status) {
+
+        if (status == null) {
+            return "";
+        }
+        status = TextCleaningOps.removeUrls(status);
+        status = TextCleaningOps.normalizeApostrophs(status);
+        status = TextCleaningOps.removeNullChars(status);
+        status = status.replaceAll(" +", " ");
+        status = TextCleaningOps.removePunctuationSigns(status);
+        status = TextCleaningOps.flattenToAscii(status);
+        status = status.replaceAll(" +", " ");
+
+        return status;
     }
 
     public static Set<String> doAllCleaningOps(Set<String> lines) {

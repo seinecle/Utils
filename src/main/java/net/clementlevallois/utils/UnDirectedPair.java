@@ -18,6 +18,16 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
         return right;
     }
 
+    public L getOther(L element) {
+        if (this.left.equals(element)) {
+            return this.right;
+        }
+        if (this.right.equals(element)) {
+            return this.left;
+        }
+        return null;
+    }
+
     @Override
     public int hashCode() {
         int hashFirst = left.hashCode();
@@ -52,7 +62,12 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
                 cmp = this.right.compareTo(other.left);
             }
         }
-
         return cmp;
     }
+
+    @Override
+    public String toString() {
+        return "{" + "left=" + left + ", right=" + right + '}';
+    }
+
 }
