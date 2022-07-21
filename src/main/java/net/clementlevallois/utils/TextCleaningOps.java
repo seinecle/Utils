@@ -210,7 +210,7 @@ public class TextCleaningOps {
 
         for (Map.Entry<Integer, String> entry : mapOfLines.entrySet()) {
             String status = entry.getValue();
-            if (status == null) {
+            if (status == null || status.isBlank()) {
                 cleanedLines.put(entry.getKey(), "");
                 continue;
             }
