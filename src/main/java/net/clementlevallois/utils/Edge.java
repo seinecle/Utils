@@ -4,14 +4,17 @@
  */
 package net.clementlevallois.utils;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
 /**
  *
  * @author C. Levallois
+ * @param <T>
+ *
  */
-public class Edge {
+public class Edge <T extends Comparable<? super T>> implements Comparable, Serializable {
 
     private String id;
     private String label;
@@ -113,9 +116,16 @@ public class Edge {
             if (!Objects.equals(this.target, other.target) & !Objects.equals(this.target, other.source)) {
                 return false;
             }
-
-
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (!(o instanceof Edge)){
+            return -1;
+        }
+        Edge eo = (Edge)o;
+        return Math.round((this.weight - eo.weight)*1000);
     }
 }

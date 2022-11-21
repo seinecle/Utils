@@ -154,6 +154,24 @@ public class TextCleaningOps {
         return input.toLowerCase();
     }
 
+    public static Map<Integer, String> putInLowerCase(Map<Integer, String> mapOfLines) {
+        Map<Integer, String> cleanedLines = new HashMap();
+        if (mapOfLines == null) {
+            return cleanedLines;
+        }
+
+        for (Map.Entry<Integer, String> entry : mapOfLines.entrySet()) {
+            String status = entry.getValue();
+            if (status == null || status.isBlank()) {
+                cleanedLines.put(entry.getKey(), "");
+                continue;
+            }
+            status = status.toLowerCase();
+            cleanedLines.put(entry.getKey(), status);
+        }
+        return cleanedLines;
+    }
+    
     public static String removedXmlEscaped(String input) {
         if (input == null) {
             return input;

@@ -1,6 +1,8 @@
 package net.clementlevallois.utils;
 
-public class UnDirectedPair<L extends Comparable<? super L>> implements Comparable<UnDirectedPair<L>> {
+import java.io.Serializable;
+
+public class UnDirectedPair<L extends Comparable<? super L>> implements Comparable<UnDirectedPair<L>>, Serializable {
 
     private final L left;
     private final L right;

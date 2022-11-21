@@ -7,6 +7,8 @@
 module net.clementlevallois.utils {
     requires java.xml;
     requires java.desktop;
-
+    requires java.logging;
+    requires java.base;
+    
     exports net.clementlevallois.utils;
 }
