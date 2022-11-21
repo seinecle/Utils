@@ -5,6 +5,7 @@
  */
 package net.clementlevallois.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,24 +23,34 @@ import java.util.Set;
  * @author LEVALLOIS
  * @param <T>
  */
-public class Multiset<T> {
+public class Multiset<T extends Comparable<? super T>> implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private Map<T, Integer> internalMap;
-    private final Comparator<Map.Entry<T, Integer>> byCountDesc;
-    private final Comparator<Map.Entry<T, Integer>> byCountAsc;
-    private Integer maxElements = 10_000;
+    private Integer maxElements;
+
+    private class ComparatorDescending implements Comparator<Map.Entry<T, Integer>>, Serializable {
+
+        @Override
+        public int compare(Map.Entry<T, Integer> firstEntry, Map.Entry<T, Integer> secondEntry) {
+            return secondEntry.getValue() - firstEntry.getValue();
+        }
+    }
+
+    private class ComparatorAscending implements Comparator<Map.Entry<T, Integer>>, Serializable {
+
+        @Override
+        public int compare(Map.Entry<T, Integer> firstEntry, Map.Entry<T, Integer> secondEntry) {
+            return firstEntry.getValue() - secondEntry.getValue();
+        }
+    }
 
     public Multiset() {
         internalMap = new HashMap();
-        byCountDesc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e2.getValue() - e1.getValue();
-        byCountAsc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e1.getValue() - e2.getValue();
-
     }
 
     public Multiset(Integer maxElements) {
         internalMap = new HashMap();
-        byCountDesc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e2.getValue() - e1.getValue();
-        byCountAsc = (Map.Entry<T, Integer> e1, Map.Entry<T, Integer> e2) -> e1.getValue() - e2.getValue();
         this.maxElements = maxElements;
 
     }
@@ -85,18 +96,14 @@ public class Multiset<T> {
 
     public void addAllFromMultiset(Multiset otherMultiset) {
         Set<Entry<T, Integer>> entrySet = otherMultiset.getEntrySet();
-        Iterator<Entry<T, Integer>> it = entrySet.iterator();
-        while (it.hasNext()) {
-            Entry<T, Integer> next = it.next();
+        for (Entry<T, Integer> next : entrySet) {
             addSeveral(next.getKey(), next.getValue());
         }
     }
 
-    public void addAllFromMap(Map<T,Integer> map) {
+    public void addAllFromMap(Map<T, Integer> map) {
         Set<Entry<T, Integer>> entrySet = map.entrySet();
-        Iterator<Entry<T, Integer>> it = entrySet.iterator();
-        while (it.hasNext()) {
-            Entry<T, Integer> next = it.next();
+        for (Entry<T, Integer> next : entrySet) {
             addSeveral(next.getKey(), next.getValue());
         }
     }
@@ -165,13 +172,13 @@ public class Multiset<T> {
 
     public List<Map.Entry<T, Integer>> sortDesc(Multiset<T> multiset) {
         List<Map.Entry<T, Integer>> toReturn = new ArrayList(multiset.getEntrySet());
-        Collections.sort(toReturn, byCountDesc);
+        Collections.sort(toReturn, new ComparatorDescending());
         return toReturn;
     }
 
     public List<Map.Entry<T, Integer>> sortAsc(Multiset<T> multiset) {
         List<Map.Entry<T, Integer>> toReturn = new ArrayList(multiset.getEntrySet());
-        Collections.sort(toReturn, byCountAsc);
+        Collections.sort(toReturn, new ComparatorAscending());
         return toReturn;
     }
 
@@ -270,7 +277,7 @@ public class Multiset<T> {
         for (Map.Entry<T, Integer> entry : sortDesckeepMostfrequent) {
             sb.append(entry.getKey()).append(" x ").append(entry.getValue()).append(", ");
         }
-        return sb.substring(0, sb.length()-2);
+        return sb.substring(0, sb.length() - 2);
     }
 
 }
