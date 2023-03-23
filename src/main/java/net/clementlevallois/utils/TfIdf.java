@@ -16,6 +16,11 @@ import java.util.TreeMap;
  */
 public class TfIdf {
 
+    /**
+     *
+     * @param categoriesToTerms
+     * @return
+     */
     public static Map<String, Map<String, Float>> calculateTopTermsPerCategory(Map<String, Multiset<String>> categoriesToTerms) {
 
         Map<String, Map<String, Float>> result = new TreeMap();

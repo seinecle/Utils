@@ -13,6 +13,13 @@ import java.util.Set;
 
 
 // from https://www.techiedelight.com/implement-multimap-java/
+
+/**
+ *
+ * @author LEVALLOIS
+ * @param <K>
+ * @param <V>
+ */
 public class MultiMap<K, V> {
 
     private Map<K, Collection<V>> map = new HashMap<>();
@@ -95,6 +102,8 @@ public class MultiMap<K, V> {
      * Removes the mapping for the specified key from this multimap if present
      * and returns the Collection of previous values associated with key, or
      * null if there was no mapping for key.
+     * @param key
+     * @return 
      */
     public Collection<V> remove(K key) {
         return map.remove(key);
@@ -102,6 +111,7 @@ public class MultiMap<K, V> {
 
     /**
      * Returns the number of key-value mappings in this multimap.
+     * @return 
      */
     public int size() {
         int size = 0;

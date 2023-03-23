@@ -21,13 +21,24 @@ public class CooccurrencesAnalyzer<L extends Comparable<? super L>, R extends Co
     private Map<R, Set<L>> inputUndirected;
     private Map<R, UnDirectedPair<L>> inputDirected;
 
+    /**
+     *
+     */
     public CooccurrencesAnalyzer() {
     }
 
+    /**
+     *
+     * @param inputUndirected
+     */
     public void setInputUndirected(Map<R, Set<L>> inputUndirected) {
         this.inputUndirected = inputUndirected;
     }
 
+    /**
+     *
+     * @param inputDirected
+     */
     public void setInputDirected(Map<R, UnDirectedPair<L>> inputDirected) {
         this.inputDirected = inputDirected;
     }
@@ -35,6 +46,11 @@ public class CooccurrencesAnalyzer<L extends Comparable<? super L>, R extends Co
 //    public CooccurrencesAnalyzer(Map<R, DirectedPair<L,L>> input) {
 //        this.input = input;
 //    }
+
+    /**
+     *
+     * @return
+     */
     public Set<Node> returnSetNodes() {
         Set<Node> setNodes = new HashSet();
         Set<L> set;
@@ -68,6 +84,10 @@ public class CooccurrencesAnalyzer<L extends Comparable<? super L>, R extends Co
         return setNodes;
     }
 
+    /**
+     *
+     * @return
+     */
     public Set<Edge> returnSetEdges() {
         Set<Edge> setEdges;
 //        if (inputUndirected == null) {
@@ -118,6 +138,11 @@ public class CooccurrencesAnalyzer<L extends Comparable<? super L>, R extends Co
 //
 //        return setEdges;
 //    }
+
+    /**
+     *
+     * @return
+     */
 
     public Set<Edge> returnSetEdgesUndirected() {
         Set<Edge> setEdges = new HashSet();

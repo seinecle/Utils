@@ -16,8 +16,16 @@ public class Clock {
     private StringBuilder intermediateText;
     private final String newLine = "\n";
     private final String interval = "-------------------------------\n\n";
+
+    /**
+     *
+     */
     public boolean silent = false;
 
+    /**
+     *
+     * @param action
+     */
     public Clock(String action) {
 
         this.action = action;
@@ -28,6 +36,11 @@ public class Clock {
         }
     }
 
+    /**
+     *
+     * @param action
+     * @param startSilent
+     */
     public Clock(String action, boolean startSilent) {
         this.action = action;
         intermediateText = new StringBuilder();
@@ -35,6 +48,11 @@ public class Clock {
         startClock(startSilent);
     }
 
+    /**
+     *
+     * @param action
+     * @param useTheOutputEnum
+     */
     public Clock(String action, Output useTheOutputEnum) {
         this.action = action;
         intermediateText = new StringBuilder();
@@ -50,33 +68,57 @@ public class Clock {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String startClockToString() {
         start = System.currentTimeMillis();
         logText.append(action).append("...").append(newLine);
         return logText.toString();
     }
 
+    /**
+     *
+     * @param it
+     */
     public void printIntermediaryText(String it) {
         intermediateText.append(it).append(newLine);
         System.out.println(intermediateText.toString());
         intermediateText = new StringBuilder();
     }
 
+    /**
+     *
+     * @param it
+     * @return
+     */
     public String printIntermediaryTextToString(String it) {
         intermediateText = new StringBuilder();
         intermediateText.append(it).append(newLine);
         return intermediateText.toString();
     }
 
+    /**
+     *
+     * @return
+     */
     public long getElapsedTime() {
         long currentTime = System.currentTimeMillis();
         return currentTime - start;
     }
 
+    /**
+     *
+     */
     public void printElapsedTime() {
         System.out.println(computeElapsedTime());
     }
 
+    /**
+     *
+     * @return
+     */
     public String printElapsedTimeTostring() {
         return computeElapsedTime();
     }
@@ -102,14 +144,26 @@ public class Clock {
         return sb.toString();
     }
 
+    /**
+     *
+     */
     public void closeAndPrintClock() {
         System.out.println(writeLogTextClosing(""));
     }
 
+    /**
+     *
+     * @param closingMessage
+     */
     public void closeAndPrintClock(String closingMessage) {
         System.out.println(writeLogTextClosing(closingMessage));
     }
 
+    /**
+     *
+     * @param closingMessage
+     * @return
+     */
     public String closeAndPrintClockToString(String closingMessage) {
         return writeLogTextClosing(closingMessage);
     }
@@ -128,6 +182,10 @@ public class Clock {
         return logText.toString();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAction() {
         return action;
     }

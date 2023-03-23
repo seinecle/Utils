@@ -19,18 +19,36 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-
+/**
+ *
+ * @author LEVALLOIS
+ */
 public class XMLParser extends DefaultHandler {
 
     static SAXParser sp;
     static InputSource toBeParsed;
     static SAXParserFactory spf;
     
+    /**
+     *
+     */
     public String tempVal;
     int numberOfThreads = Runtime.getRuntime().availableProcessors();
     ExecutorService pool = Executors.newFixedThreadPool(numberOfThreads);
+
+    /**
+     *
+     */
     public String itemType;
+
+    /**
+     *
+     */
     public static int counter;
+
+    /**
+     *
+     */
     public String extractedText;
 
     
@@ -47,6 +65,12 @@ public class XMLParser extends DefaultHandler {
     
 //    private HashMultimap<String,String> mapTypeToText = HashMultimap.create();
 
+    /**
+     *
+     * @param is
+     * @throws IOException
+     */
+
     public XMLParser(InputSource is) throws IOException {
 
             toBeParsed = is;
@@ -54,7 +78,10 @@ public class XMLParser extends DefaultHandler {
 
     }
 
-
+    /**
+     *
+     * @throws IOException
+     */
     public void parseDocument() throws IOException {
 
         System.out.println("we are in the parse document method 1");
@@ -81,6 +108,14 @@ public class XMLParser extends DefaultHandler {
         
     }
 
+    /**
+     *
+     * @param uri
+     * @param localName
+     * @param qName
+     * @param attributes
+     * @throws SAXException
+     */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 
@@ -107,6 +142,13 @@ public class XMLParser extends DefaultHandler {
 
     }
 
+    /**
+     *
+     * @param ch
+     * @param start
+     * @param length
+     * @throws SAXException
+     */
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
 
@@ -117,6 +159,13 @@ public class XMLParser extends DefaultHandler {
 
     }
 
+    /**
+     *
+     * @param uri
+     * @param localName
+     * @param qName
+     * @throws SAXException
+     */
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
 

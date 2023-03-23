@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 //@Embedded
+
+/**
+ *
+ * @author LEVALLOIS
+ */
 public class Quidam implements Comparable<Quidam>, Serializable {
 
     private String forename;
@@ -14,53 +19,104 @@ public class Quidam implements Comparable<Quidam>, Serializable {
     private String uuid;
     private String fullnameWithComma;
 
+    /**
+     *
+     */
     public Quidam() {
     }
 
+    /**
+     *
+     * @param forename
+     * @param surname
+     */
     public Quidam(String forename, String surname) {
         this.forename = forename.replace(".", "").trim();
         this.surname = surname.trim();
     }
 
+    /**
+     *
+     * @param forename
+     * @param surname
+     * @param uuid
+     */
     public Quidam(String forename, String surname, UUID uuid) {
         this.forename = forename.replace(".", "").trim();
         this.surname = surname.trim();
         this.uuid = uuid.toString();
     }
 
+    /**
+     *
+     * @param fullname
+     * @param uuid
+     */
     public Quidam(String fullname, UUID uuid) {
         this.surname = fullname.trim();
         this.uuid = uuid.toString();
     }
 
+    /**
+     *
+     * @param fullname
+     */
     public Quidam(String fullname) {
         this.fullname = fullname.trim();
     }
 
+    /**
+     *
+     * @param forename
+     */
     public void setForename(String forename) {
         this.forename = forename.replace(".", "").trim();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getForename() {
         return forename;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     *
+     * @param uuid
+     */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     *
+     * @param surname
+     */
     public void setSurname(String surname) {
         this.surname = surname.trim();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFullname() {
 
         String fullnameToReturn;
@@ -72,10 +128,18 @@ public class Quidam implements Comparable<Quidam>, Serializable {
         return fullnameToReturn;
     }
 
+    /**
+     *
+     * @param fullname
+     */
     public void setFullname(String fullname) {
         this.fullname = fullname.trim();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFullnameWithComma() {
 
         String fullnameWithCommaToReturn;
@@ -90,6 +154,10 @@ public class Quidam implements Comparable<Quidam>, Serializable {
         return fullnameWithCommaToReturn;
     }
 
+    /**
+     *
+     * @param newFullnameWithComma
+     */
     public void setFullnameWithComma(String newFullnameWithComma) {
         String[] arrayTerms = newFullnameWithComma.split(",");
 //        if (arrayTerms.length == 1) {
@@ -106,14 +174,26 @@ public class Quidam implements Comparable<Quidam>, Serializable {
 //        }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLd() {
         return ld.toArray().toString();
     }
 
+    /**
+     *
+     * @param ld
+     */
     public void setLd(ArrayList<Quidam> ld) {
         this.ld = ld;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -121,6 +201,11 @@ public class Quidam implements Comparable<Quidam>, Serializable {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -136,6 +221,10 @@ public class Quidam implements Comparable<Quidam>, Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public String[] toArray() {
         String[] args = new String[2];
         args[0] = forename;
@@ -143,6 +232,11 @@ public class Quidam implements Comparable<Quidam>, Serializable {
         return args;
     }
 
+    /**
+     *
+     * @param other
+     * @return
+     */
     @Override
     public int compareTo(Quidam other) {
         int result;
@@ -154,6 +248,10 @@ public class Quidam implements Comparable<Quidam>, Serializable {
         return result;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
 

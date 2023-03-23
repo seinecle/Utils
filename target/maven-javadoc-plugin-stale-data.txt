@@ -1,0 +1,52 @@
+@options
+@packages
+@argfile
+--module-path
+'C:/Users/levallois/open/Utils/target/utils-core-1.0.jar'
+--patch-module
+net.clementlevallois.utils='C:/Users/levallois/open/Utils/src/main/java;C:/Users/levallois/open/Utils/target/generated-sources/annotations'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+--module-source-path
+'C:/Users/levallois/open/Utils/target/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/levallois/open/Utils/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Utils from Clement Levallois 1.0 API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/levallois/open/Utils/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'Utils from Clement Levallois 1.0 API'
+net.clementlevallois.utils
+'C:/Users/levallois/open/Utils/src/main/java/module-info.java'
+C:\Users\levallois\open\Utils\target\apidocs\allclasses-index.html = 1679577104682
+C:\Users\levallois\open\Utils\target\apidocs\allpackages-index.html = 1679577104703
+C:\Users\levallois\open\Utils\target\apidocs\deprecated-list.html = 1679576362330
+C:\Users\levallois\open\Utils\target\apidocs\element-list = 1679577104010
+C:\Users\levallois\open\Utils\target\apidocs\help-doc.html = 1679577104914
+C:\Users\levallois\open\Utils\target\apidocs\index-all.html = 1679577104834
+C:\Users\levallois\open\Utils\target\apidocs\index.html = 1679577104891
+C:\Users\levallois\open\Utils\target\apidocs\javadoc.bat = 1679577050118
+C:\Users\levallois\open\Utils\target\apidocs\jquery-ui.overrides.css = 1679577105078
+C:\Users\levallois\open\Utils\target\apidocs\member-search-index.js = 1679577104748
+C:\Users\levallois\open\Utils\target\apidocs\module-search-index.js = 1679577104715
+C:\Users\levallois\open\Utils\target\apidocs\overview-tree.html = 1679577104618
+C:\Users\levallois\open\Utils\target\apidocs\package-search-index.js = 1679577104722
+C:\Users\levallois\open\Utils\target\apidocs\script.js = 1679577104953
+C:\Users\levallois\open\Utils\target\apidocs\search.js = 1679577104964
+C:\Users\levallois\open\Utils\target\apidocs\serialized-form.html = 1679577104117
+C:\Users\levallois\open\Utils\target\apidocs\stylesheet.css = 1679577104937
+C:\Users\levallois\open\Utils\target\apidocs\tag-search-index.js = 1679577104764
+C:\Users\levallois\open\Utils\target\apidocs\type-search-index.js = 1679577104735

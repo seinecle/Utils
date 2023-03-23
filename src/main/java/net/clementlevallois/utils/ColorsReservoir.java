@@ -16,11 +16,19 @@ public class ColorsReservoir {
 
     private static ArrayList<String> reservoir;
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getReservoir() {
         fillReservoir();
         return reservoir;
     }
 
+    /**
+     *
+     * @return
+     */
     public static Color[] getFullColorArray() {
         fillReservoir();
         Color[] colors = new Color[reservoir.size()];
@@ -32,6 +40,11 @@ public class ColorsReservoir {
         return colors;
     }
 
+    /**
+     *
+     * @param n
+     * @return
+     */
     public static Color[] getColorArrayForASize(int n) {
         fillReservoir();
         if (n > reservoir.size()) {
@@ -47,6 +60,9 @@ public class ColorsReservoir {
         return newArray;
     }
 
+    /**
+     *
+     */
     public static void fillReservoir() {
         reservoir = new ArrayList();
         reservoir.add("#5E9421");

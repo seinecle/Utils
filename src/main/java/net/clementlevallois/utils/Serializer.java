@@ -16,12 +16,21 @@ import java.util.logging.Logger;
  */
 public class Serializer {
 
+    /**
+     *
+     * @param argd
+     */
     public static void main(String argd[]) {
         Multiset ms = new Multiset();
         ms.addOne("test");
         Serializer.byteArraySerializerForAnyObject(ms);
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     public static byte[] byteArraySerializerForAnyObject(Object o) {
         ObjectOutputStream oos = null;
         try {

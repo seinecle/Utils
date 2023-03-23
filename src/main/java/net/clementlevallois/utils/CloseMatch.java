@@ -24,9 +24,17 @@ public class CloseMatch implements Comparable<CloseMatch>, Serializable {
     private boolean author2Selected;
     private String uuid;
 
+    /**
+     *
+     */
     public CloseMatch() {
     }
 
+    /**
+     *
+     * @param item1
+     * @param item2
+     */
     public CloseMatch(String item1, String item2) {
         this.author1 = item1;
         this.author2 = item2;
@@ -38,70 +46,138 @@ public class CloseMatch implements Comparable<CloseMatch>, Serializable {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAuthor1() {
         return author1;
     }
 
+    /**
+     *
+     * @param author1
+     */
     public void setAuthor1(String author1) {
         this.author1 = author1;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAuthor2() {
         return author2;
     }
 
+    /**
+     *
+     * @param author2
+     */
     public void setAuthor2(String author2) {
         this.author2 = author2;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAuthor3() {
         return author3;
     }
 
+    /**
+     *
+     * @param author3
+     */
     public void setAuthor3(String author3) {
         this.author3 = author3;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAuthor1Displayed() {
         return author1Displayed;
     }
 
+    /**
+     *
+     * @param author1Displayed
+     */
     public void setAuthor1Displayed(String author1Displayed) {
         this.author1Displayed = author1Displayed;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAuthor2Displayed() {
         return author2Displayed;
     }
 
+    /**
+     *
+     * @param author2Displayed
+     */
     public void setAuthor2Displayed(String author2Displayed) {
         this.author2Displayed = author2Displayed;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isAuthor1Selected() {
         return author1Selected;
     }
 
+    /**
+     *
+     * @param author1Selected
+     */
     public void setAuthor1Selected(boolean author1Selected) {
         this.author1Selected = author1Selected;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isAuthor2Selected() {
         return author2Selected;
     }
 
+    /**
+     *
+     * @param author2Selected
+     */
     public void setAuthor2Selected(boolean author2Selected) {
         this.author2Selected = author2Selected;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     *
+     * @param uuid
+     */
     public void setUuid(UUID uuid) {
         this.uuid = uuid.toString();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -110,6 +186,11 @@ public class CloseMatch implements Comparable<CloseMatch>, Serializable {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -128,6 +209,11 @@ public class CloseMatch implements Comparable<CloseMatch>, Serializable {
         return true;
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public int compareTo(CloseMatch o) {
         return this.author1.compareTo(o.author1);

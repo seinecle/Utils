@@ -16,10 +16,19 @@ public class LimitedQueue<E> extends LinkedList<E> {
 
     private final int limit;
 
+    /**
+     *
+     * @param limit
+     */
     public LimitedQueue(int limit) {
         this.limit = limit;
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean add(E o) {
         boolean added = super.add(o);

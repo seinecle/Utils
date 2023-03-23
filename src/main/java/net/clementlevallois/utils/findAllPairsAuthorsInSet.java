@@ -14,6 +14,11 @@ import java.util.TreeSet;
  */
 public class findAllPairsAuthorsInSet {
 
+    /**
+     *
+     * @param setAuthorsInHere
+     * @return
+     */
     static public TreeSet<DirectedPair<Author, Author>> getAllPairs(Set<Author> setAuthorsInHere) {
         Set<Author> setAuthorsProcessed = new TreeSet();
         TreeSet<DirectedPair<Author, Author>> setPairs = new TreeSet();

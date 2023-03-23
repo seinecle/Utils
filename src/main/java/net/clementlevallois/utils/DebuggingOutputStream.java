@@ -15,6 +15,10 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author LEVALLOIS
+ */
 public class DebuggingOutputStream
         extends ObjectOutputStream {
 
@@ -39,6 +43,11 @@ public class DebuggingOutputStream
      */
     boolean broken = false;
 
+    /**
+     *
+     * @param out
+     * @throws IOException
+     */
     public DebuggingOutputStream(OutputStream out) throws IOException {
         super(out);
         enableReplaceObject(true);
@@ -46,6 +55,7 @@ public class DebuggingOutputStream
 
     /**
      * Abuse {@code replaceObject()} as a hook to maintain our stack.
+     * @param o
      */
     protected Object replaceObject(Object o) {
         // ObjectOutputStream writes serialization
@@ -91,8 +101,9 @@ public class DebuggingOutputStream
     }
 
     /**
-     * Returns the path to the last object serialized. If an exception occurred,
-     * this should be the path to the non-serializable object.
+     * Returns the path to the last object serialized.If an exception occurred,
+ this should be the path to the non-serializable object.
+     * @return 
      */
     public List<Object> getStack() {
         return stack;

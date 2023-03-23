@@ -13,6 +13,11 @@ import java.text.Normalizer;
  */
 public class MyStringUtils {
 
+    /**
+     *
+     * @param str
+     * @return
+     */
     public static boolean isNumeric(String str) {
         for (char c : str.toCharArray()) {
             if (!Character.isDigit(c)) {
@@ -38,6 +43,12 @@ public class MyStringUtils {
     }
 
     // from https://stackoverflow.com/a/15191508/798502
+
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String flattenToAscii(String string) {
         char[] out = new char[string.length()];
         string = Normalizer.normalize(string, Normalizer.Form.NFD);

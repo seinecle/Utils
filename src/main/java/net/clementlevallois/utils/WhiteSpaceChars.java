@@ -39,6 +39,10 @@ public class WhiteSpaceChars {
                         + "\\u3000" // IDEOGRAPHIC SPACE
                         ;        
     
+    /**
+     *
+     * @return
+     */
     public static String getWhiteSpaceChars(){
         return whitespace_chars;
     }

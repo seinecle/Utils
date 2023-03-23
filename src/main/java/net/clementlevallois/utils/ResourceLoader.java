@@ -47,6 +47,11 @@ public class ResourceLoader {
         return null;
     }
 
+    /**
+     *
+     * @param resource
+     * @return
+     */
     public static URL getResource(String resource) {
         final List<ClassLoader> classLoaders = new ArrayList();
         classLoaders.add(Thread.currentThread().getContextClassLoader());
@@ -71,6 +76,11 @@ public class ResourceLoader {
         }
     }
 
+    /**
+     *
+     * @param resource
+     * @return
+     */
     public static InputStream getResourceAsStream(String resource) {
         final List<ClassLoader> classLoaders = new ArrayList();
         classLoaders.add(Thread.currentThread().getContextClassLoader());
@@ -105,6 +115,12 @@ public class ResourceLoader {
         return null;
     }
 
+    /**
+     *
+     * @param propertiesFileName
+     * @param propertyName
+     * @return
+     */
     public static String getProperty(String propertiesFileName, String propertyName) {
 
         try {
@@ -126,6 +142,12 @@ public class ResourceLoader {
         }
     }
 
+    /**
+     *
+     * @param propertiesFileName
+     * @param propertyName
+     * @param propertyValue
+     */
     public static void setProperty(String propertiesFileName, String propertyName, String propertyValue) {
 
         try {

@@ -2,24 +2,47 @@ package net.clementlevallois.utils;
 
 import java.io.Serializable;
 
+/**
+ *
+ * @author LEVALLOIS
+ * @param <L>
+ */
 public class UnDirectedPair<L extends Comparable<? super L>> implements Comparable<UnDirectedPair<L>>, Serializable {
 
     private final L left;
     private final L right;
 
+    /**
+     *
+     * @param left
+     * @param right
+     */
     public UnDirectedPair(L left, L right) {
         this.left = left;
         this.right = right;
     }
 
+    /**
+     *
+     * @return
+     */
     public L getLeft() {
         return left;
     }
 
+    /**
+     *
+     * @return
+     */
     public L getRight() {
         return right;
     }
 
+    /**
+     *
+     * @param element
+     * @return
+     */
     public L getOther(L element) {
         if (this.left.equals(element)) {
             return this.right;
@@ -30,6 +53,10 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
         return null;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hashFirst = left.hashCode();
@@ -39,6 +66,11 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
         return minHash * 31 + maxHash;
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null) {
@@ -53,6 +85,11 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
                 & this.right.equals(pairo.getLeft())));
     }
 
+    /**
+     *
+     * @param other
+     * @return
+     */
     @Override
     public int compareTo(UnDirectedPair<L> other) {
         int cmp = this.left.compareTo(other.left);
@@ -67,6 +104,10 @@ public class UnDirectedPair<L extends Comparable<? super L>> implements Comparab
         return cmp;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "{" + "left=" + left + ", right=" + right + '}';

@@ -10,5 +10,9 @@ package net.clementlevallois.utils;
  * @author LEVALLOIS
  */
 public enum Output {
+
+    /**
+     *
+     */
     TO_STRING;
 }

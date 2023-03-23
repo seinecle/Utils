@@ -13,8 +13,17 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *
+ * @author LEVALLOIS
+ */
 public class TextCleaningOps {
 
+    /**
+     *
+     * @param status
+     * @return
+     */
     public static String clean(String status) {
         if (status == null) {
             return "";
@@ -30,6 +39,11 @@ public class TextCleaningOps {
         return status;
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String removePunctuationSigns(String string) {
         if (string == null) {
             return "";
@@ -43,6 +57,11 @@ public class TextCleaningOps {
         return string.trim();
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String detachCamelCaseWordsAndPutInLowerCase(String string) {
         if (string.contains("LeMonde") || string.contains("PhD")) {
             return string;
@@ -63,6 +82,12 @@ public class TextCleaningOps {
         return sb.toString();
     }
 
+    /**
+     *
+     * @param terms
+     * @param lessOrEqualToNumber
+     * @return
+     */
     public static Multiset<String> removeSmallWords(Multiset<String> terms, int lessOrEqualToNumber) {
 
         Iterator<Map.Entry<String, Integer>> it = terms.getEntrySet().iterator();
@@ -75,6 +100,12 @@ public class TextCleaningOps {
         return terms;
     }
 
+    /**
+     *
+     * @param string
+     * @param lessOrEqualToNumber
+     * @return
+     */
     public static boolean shouldItBeRemoved(String string, int lessOrEqualToNumber) {
 
         if (string.trim().length() < lessOrEqualToNumber | string.matches(".*\\d.*")) {
@@ -85,6 +116,11 @@ public class TextCleaningOps {
 
     }
 
+    /**
+     *
+     * @param status
+     * @return
+     */
     public static String removeUrls(String status) {
 //            System.out.println(status);
         status = status.replaceAll("http[^ ]*", " ");
@@ -95,6 +131,11 @@ public class TextCleaningOps {
         return status;
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String removeStartAndFinalApostrophs(String string) {
         string = string.replaceAll("’", "'");
         string = string.endsWith("'s") ? string.substring(0, string.lastIndexOf("'s")) : string;
@@ -109,11 +150,21 @@ public class TextCleaningOps {
         return string.trim();
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String normalizeApostrophs(String string) {
         string = string.replaceAll("’", "'");
         return string;
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String removeTermsBetweenQuotes(String string) {
         string = string.replaceAll("\".*?\"", " ");
         string = string.replaceAll("«.*?»", " ");
@@ -121,6 +172,11 @@ public class TextCleaningOps {
         return string.trim();
     }
 
+    /**
+     *
+     * @param status
+     * @return
+     */
     public static boolean isItCleaned(String status) {
         if (status.contains("\"")) {
             String s1 = status.replaceFirst("\"", "");
@@ -130,6 +186,12 @@ public class TextCleaningOps {
         }
     }
 
+    /**
+     *
+     * @param terms
+     * @param maxLetters
+     * @return
+     */
     public static Multiset<String> removeSmallWordsOrNumeric(Multiset<String> terms, int maxLetters) {
 
         Iterator<Map.Entry<String, Integer>> it = terms.getEntrySet().iterator();
@@ -142,18 +204,38 @@ public class TextCleaningOps {
         return terms;
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String removeNumeric(String string) {
         return string.replaceAll("[\\d]", "");
     }
 
+    /**
+     *
+     * @param status
+     * @return
+     */
     public static String removeHashtags(String status) {
         return status.replaceAll("#\\p{L}+", "");
     }
 
+    /**
+     *
+     * @param input
+     * @return
+     */
     public static String putInLowerCase(String input) {
         return input.toLowerCase();
     }
 
+    /**
+     *
+     * @param mapOfLines
+     * @return
+     */
     public static Map<Integer, String> putInLowerCase(Map<Integer, String> mapOfLines) {
         Map<Integer, String> cleanedLines = new HashMap();
         if (mapOfLines == null) {
@@ -172,6 +254,11 @@ public class TextCleaningOps {
         return cleanedLines;
     }
     
+    /**
+     *
+     * @param input
+     * @return
+     */
     public static String removedXmlEscaped(String input) {
         if (input == null) {
             return input;
@@ -184,6 +271,11 @@ public class TextCleaningOps {
         return cleaned;
     }
 
+    /**
+     *
+     * @param cleaned
+     * @return
+     */
     public static String removeEmojisBetweenSemiColons(String cleaned) {
         Pattern p = Pattern.compile(":(.*?):");
         int count = cleaned.length() - cleaned.replace(":", "").length();
@@ -196,6 +288,11 @@ public class TextCleaningOps {
         return cleaned;
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String removeNullChars(String string) {
         char nulChar = Character.MIN_VALUE;
         string = string.replaceAll(String.valueOf(nulChar), " ");
@@ -204,6 +301,12 @@ public class TextCleaningOps {
     }
 
     // from https://stackoverflow.com/a/15191508/798502
+
+    /**
+     *
+     * @param string
+     * @return
+     */
     public static String flattenToAscii(String string) {
         if (string == null || string.isBlank()) {
             return string;
@@ -220,6 +323,32 @@ public class TextCleaningOps {
         return new String(out, 0, j);
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
+    public static String flattenToAsciiAndRemoveApostrophs(String string) {
+        if (string == null || string.isBlank()) {
+            return string;
+        }
+        char[] out = new char[string.length()];
+        string = Normalizer.normalize(string, Normalizer.Form.NFD);
+        int j = 0;
+        for (int i = 0, n = string.length(); i < n; ++i) {
+            char c = string.charAt(i);
+            if (c <= '\u007F' & c!='\''& c!='’') {
+                out[j++] = c;
+            }
+        }
+        return new String(out, 0, j);
+    }
+
+    /**
+     *
+     * @param mapOfLines
+     * @return
+     */
     public static Map<Integer, String> doAllCleaningOps(Map<Integer, String> mapOfLines) {
         Map<Integer, String> cleanedLines = new HashMap();
         if (mapOfLines == null) {
@@ -244,6 +373,11 @@ public class TextCleaningOps {
         return cleanedLines;
     }
 
+    /**
+     *
+     * @param status
+     * @return
+     */
     public static String doAllCleaningOps(String status) {
 
         if (status == null) {
@@ -260,6 +394,11 @@ public class TextCleaningOps {
         return status;
     }
 
+    /**
+     *
+     * @param lines
+     * @return
+     */
     public static Set<String> doAllCleaningOps(Set<String> lines) {
 
         Set<String> results = new HashSet();

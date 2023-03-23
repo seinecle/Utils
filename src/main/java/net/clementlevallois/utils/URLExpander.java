@@ -17,6 +17,11 @@ import java.net.URL;
  */
 public class URLExpander {
 
+    /**
+     *
+     * @param shortenedUrl
+     * @return
+     */
     public static String expand(String shortenedUrl) {
         if (shortenedUrl == null || shortenedUrl.isEmpty()) {
             return "";

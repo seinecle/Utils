@@ -12,6 +12,10 @@ package net.clementlevallois.utils;
 //--------------------------------------
 import java.math.BigInteger;
 
+/**
+ *
+ * @author LEVALLOIS
+ */
 public class CombinationGenerator {
 
     private int[] a;
@@ -23,6 +27,11 @@ public class CombinationGenerator {
 // Constructor
 //------------
 
+    /**
+     *
+     * @param n
+     * @param r
+     */
     public CombinationGenerator(int n, int r) {
         if (r > n) {
             throw new IllegalArgumentException();
@@ -43,6 +52,9 @@ public class CombinationGenerator {
 // Reset
 //------
 
+    /**
+     *
+     */
     public void reset() {
         for (int i = 0; i < a.length; i++) {
             a[i] = i;
@@ -53,6 +65,10 @@ public class CombinationGenerator {
 // Return number of combinations not yet generated
 //------------------------------------------------
 
+    /**
+     *
+     * @return
+     */
     public BigInteger getNumLeft() {
         return numLeft;
     }
@@ -60,6 +76,10 @@ public class CombinationGenerator {
 // Are there more combinations?
 //-----------------------------
 
+    /**
+     *
+     * @return
+     */
     public boolean hasMore() {
         return numLeft.compareTo(BigInteger.ZERO) == 1;
     }
@@ -67,6 +87,10 @@ public class CombinationGenerator {
 // Return total number of combinations
 //------------------------------------
 
+    /**
+     *
+     * @return
+     */
     public BigInteger getTotal() {
         return total;
     }
@@ -85,6 +109,10 @@ public class CombinationGenerator {
 // Generate next combination (algorithm from Rosen p. 286)
 //--------------------------------------------------------
 
+    /**
+     *
+     * @return
+     */
     public int[] getNext() {
         if (numLeft.equals(total)) {
             numLeft = numLeft.subtract(BigInteger.ONE);

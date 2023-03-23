@@ -8,15 +8,31 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ *
+ * @author LEVALLOIS
+ */
 public class PerformCombinations {
 
     private final String[] table;
 
+    /**
+     *
+     * @param table
+     * @throws InterruptedException
+     * @throws IOException
+     */
     public PerformCombinations(String[] table) throws InterruptedException, IOException {
         this.table = table;
 
     }
 
+    /**
+     *
+     * @return
+     * @throws InterruptedException
+     * @throws IOException
+     */
     public Set<String> call() throws InterruptedException, IOException {
 
         int i = 0;

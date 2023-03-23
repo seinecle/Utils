@@ -23,7 +23,10 @@ import java.util.Set;
  * @author LEVALLOIS
  * @param <T>
  */
-public class Multiset<T extends Comparable<? super T>> implements Serializable {
+public class Multiset
+        <T> 
+//        <T extends Comparable<? super T>> 
+        implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Map<T, Integer> internalMap;
@@ -45,28 +48,52 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         }
     }
 
+    /**
+     *
+     */
     public Multiset() {
         internalMap = new HashMap();
     }
 
+    /**
+     *
+     * @param maxElements
+     */
     public Multiset(Integer maxElements) {
         internalMap = new HashMap();
         this.maxElements = maxElements;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<T, Integer> getInternalMap() {
         return internalMap;
     }
 
+    /**
+     *
+     * @param internalMap
+     */
     public void setInternalMap(Map<T, Integer> internalMap) {
         this.internalMap = internalMap;
     }
 
+    /**
+     *
+     * @param element
+     * @param count
+     */
     public void setCount(T element, int count) {
         internalMap.put(element, count);
     }
 
+    /**
+     *
+     * @param element
+     */
     public void addOne(T element) {
         Integer preCount = internalMap.get(element);
         if (preCount == null) {
@@ -75,6 +102,10 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         internalMap.put(element, preCount + 1);
     }
 
+    /**
+     *
+     * @param element
+     */
     public void addOneWithLimitToMaxElements(T element) {
         if (internalMap.size() >= maxElements) {
             return;
@@ -86,6 +117,11 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         internalMap.put(element, preCount + 1);
     }
 
+    /**
+     *
+     * @param element
+     * @param count
+     */
     public void addSeveral(T element, Integer count) {
         Integer preCount = internalMap.get(element);
         if (preCount == null) {
@@ -94,6 +130,10 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         internalMap.put(element, preCount + count);
     }
 
+    /**
+     *
+     * @param otherMultiset
+     */
     public void addAllFromMultiset(Multiset otherMultiset) {
         Set<Entry<T, Integer>> entrySet = otherMultiset.getEntrySet();
         for (Entry<T, Integer> next : entrySet) {
@@ -101,6 +141,10 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param map
+     */
     public void addAllFromMap(Map<T, Integer> map) {
         Set<Entry<T, Integer>> entrySet = map.entrySet();
         for (Entry<T, Integer> next : entrySet) {
@@ -108,12 +152,20 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param list
+     */
     public void addAllFromListOrSet(Collection<T> list) {
         for (T o : list) {
             addOne(o);
         }
     }
 
+    /**
+     *
+     * @param element
+     */
     public void removeOne(T element) {
         if (!internalMap.containsKey(element)) {
             return;
@@ -128,6 +180,11 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
 
     }
 
+    /**
+     *
+     * @param element
+     * @param numberToBeRemoved
+     */
     public void removeSeveral(T element, Integer numberToBeRemoved) {
         if (!internalMap.containsKey(element)) {
             return;
@@ -140,6 +197,11 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param element
+     * @return
+     */
     public Integer getCount(T element) {
         if (!internalMap.containsKey(element)) {
             return 0;
@@ -147,18 +209,36 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         return internalMap.get(element);
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getSize() {
         return internalMap.size();
     }
 
+    /**
+     *
+     * @return
+     */
     public Set<T> getElementSet() {
         return internalMap.keySet();
     }
 
+    /**
+     *
+     * @return
+     */
     public Set<Map.Entry<T, Integer>> getEntrySet() {
         return internalMap.entrySet();
     }
 
+    /**
+     *
+     * @param <K>
+     * @param <V>
+     * @return
+     */
     public <K, V extends Comparable<? super V>> Map<K, V> sortByFreq() {
         List<Entry<K, V>> list = new ArrayList(internalMap.entrySet());
         list.sort(Entry.comparingByValue());
@@ -170,18 +250,34 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         return result;
     }
 
+    /**
+     *
+     * @param multiset
+     * @return
+     */
     public List<Map.Entry<T, Integer>> sortDesc(Multiset<T> multiset) {
         List<Map.Entry<T, Integer>> toReturn = new ArrayList(multiset.getEntrySet());
         Collections.sort(toReturn, new ComparatorDescending());
         return toReturn;
     }
 
+    /**
+     *
+     * @param multiset
+     * @return
+     */
     public List<Map.Entry<T, Integer>> sortAsc(Multiset<T> multiset) {
         List<Map.Entry<T, Integer>> toReturn = new ArrayList(multiset.getEntrySet());
         Collections.sort(toReturn, new ComparatorAscending());
         return toReturn;
     }
 
+    /**
+     *
+     * @param multiset
+     * @param n
+     * @return
+     */
     public List<Map.Entry<T, Integer>> sortDesckeepMostfrequent(Multiset<T> multiset, int n) {
         List<Map.Entry<T, Integer>> toReturn = new ArrayList();
 
@@ -204,6 +300,12 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         return toReturn;
     }
 
+    /**
+     *
+     * @param multiset
+     * @param n
+     * @return
+     */
     public Multiset<T> keepMostfrequent(Multiset<T> multiset, int n) {
 
         Multiset<T> toReturn = new Multiset();
@@ -225,6 +327,12 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         return toReturn;
     }
 
+    /**
+     *
+     * @param multiset
+     * @param n
+     * @return
+     */
     public List<Map.Entry<T, Integer>> sortDesckeepAboveMinFreq(Multiset<T> multiset, int n) {
         List<Map.Entry<T, Integer>> toReturn = new ArrayList();
 
@@ -243,6 +351,10 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         return toReturn;
     }
 
+    /**
+     *
+     * @return
+     */
     public List toListOfElements() {
         List list = new ArrayList();
         for (Map.Entry entry : internalMap.entrySet()) {
@@ -252,6 +364,10 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public List<T> toListOfAllOccurrences() {
         List list = new ArrayList();
         for (Map.Entry entry : internalMap.entrySet()) {
@@ -264,6 +380,10 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
 
     }
 
+    /**
+     *
+     * @param topRank
+     */
     public void printTopRankedElements(int topRank) {
         List<Entry<T, Integer>> sortDesckeepMostfrequent = this.sortDesckeepMostfrequent(this, topRank);
         for (Map.Entry<T, Integer> entry : sortDesckeepMostfrequent) {
@@ -271,11 +391,30 @@ public class Multiset<T extends Comparable<? super T>> implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param topRank
+     * @return
+     */
     public String topRankedElementsToString(int topRank) {
         StringBuilder sb = new StringBuilder();
         List<Entry<T, Integer>> sortDesckeepMostfrequent = this.sortDesckeepMostfrequent(this, topRank);
         for (Map.Entry<T, Integer> entry : sortDesckeepMostfrequent) {
             sb.append(entry.getKey()).append(" x ").append(entry.getValue()).append(", ");
+        }
+        return sb.substring(0, sb.length() - 2);
+    }
+
+    /**
+     *
+     * @param topRank
+     * @return
+     */
+    public String topRankedElementsToStringWithoutCounts(int topRank) {
+        StringBuilder sb = new StringBuilder();
+        List<Entry<T, Integer>> sortDesckeepMostfrequent = this.sortDesckeepMostfrequent(this, topRank);
+        for (Map.Entry<T, Integer> entry : sortDesckeepMostfrequent) {
+            sb.append(entry.getKey()).append(", ");
         }
         return sb.substring(0, sb.length() - 2);
     }

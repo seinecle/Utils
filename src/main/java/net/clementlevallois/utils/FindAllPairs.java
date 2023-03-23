@@ -22,6 +22,11 @@ public class FindAllPairs<T extends Comparable<? super T>> {
 
     private T t;
 
+    /**
+     *
+     * @param setObjects
+     * @return
+     */
     public Set<DirectedPair<T, T>> getAllDirectedPairs(Set<T> setObjects) {
         Set<T> setObjectsProcessed = new HashSet();
         Set<DirectedPair<T, T>> setPairs = new HashSet();
@@ -44,6 +49,12 @@ public class FindAllPairs<T extends Comparable<? super T>> {
 
     }
 
+    /**
+     *
+     * @param setSources
+     * @param setTargets
+     * @return
+     */
     public Set<DirectedPair<T, T>> getAllDirectedPairsFromTwoSets(Set<T> setSources, Set<T> setTargets) {
         Set<DirectedPair<T, T>> setPairs = new TreeSet();
         Iterator<T> setSourcesIterator = setSources.iterator();
@@ -64,6 +75,11 @@ public class FindAllPairs<T extends Comparable<? super T>> {
 
     }
 
+    /**
+     *
+     * @param setObjects
+     * @return
+     */
     public Set<UnDirectedPair<T>> getAllUndirectedPairs(Set<T> setObjects) {
         Set<UnDirectedPair<T>> setPairs;
         setPairs = new HashSet();
@@ -92,6 +108,11 @@ public class FindAllPairs<T extends Comparable<? super T>> {
         return setPairs;
     }
 
+    /**
+     *
+     * @param listObjects
+     * @return
+     */
     public Set<UnDirectedPair<T>> getAllUndirectedPairsFromList(List<T> listObjects) {
         Set<UnDirectedPair<T>> setPairs;
         setPairs = new HashSet();
@@ -120,6 +141,11 @@ public class FindAllPairs<T extends Comparable<? super T>> {
         return setPairs;
     }
 
+    /**
+     *
+     * @param setObjects
+     * @return
+     */
     public List<Map<String,T>> getAllUndirectedPairsAsList(Set<T> setObjects) {
 //        Clock findingAllPairsClock = new Clock("finding all pairs in a set of "+setObjects.size()+" objects");
         List<T> listObjects = new ArrayList();

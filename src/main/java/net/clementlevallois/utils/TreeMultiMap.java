@@ -14,14 +14,28 @@ import java.util.TreeMap;
 
 
 // from https://www.techiedelight.com/implement-multimap-java/
+
+/**
+ *
+ * @author LEVALLOIS
+ * @param <K>
+ * @param <V>
+ */
 public class TreeMultiMap<K, V> {
 
     private Map<K, Collection<V>> map;
 
+    /**
+     *
+     */
     public TreeMultiMap() {
         map = new TreeMap();
     }
 
+    /**
+     *
+     * @param order
+     */
     public TreeMultiMap(Comparator<K> order) {
         map = new TreeMap<>(order);
     }
@@ -71,6 +85,7 @@ public class TreeMultiMap<K, V> {
 
     /**
      * Returns a Set view of the keys contained in this multimap.
+     * @return 
      */
     public Set<K> keySet() {
         return map.keySet();
@@ -108,6 +123,8 @@ public class TreeMultiMap<K, V> {
      * Removes the mapping for the specified key from this multimap if present
      * and returns the Collection of previous values associated with key, or
      * null if there was no mapping for key.
+     * @param key
+     * @return 
      */
     public Collection<V> remove(K key) {
         return map.remove(key);

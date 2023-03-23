@@ -48,9 +48,18 @@ import java.util.HashSet;
 import java.util.Set;
 //import org.apache.commons.lang3.StringUtils;
 
+/**
+ *
+ * @author LEVALLOIS
+ */
 public class RepeatedCharactersRemover {
 
-
+    /**
+     *
+     * @param currTerm
+     * @param termsThatShouldNotBeModified
+     * @return
+     */
     public static String repeatedCharacters(String currTerm, Set<String> termsThatShouldNotBeModified) {
 //        if (currTerm.equals("suuuuuuuuucks")) {
 //            System.out.println("stooop");

@@ -13,6 +13,11 @@ import java.util.Random;
  */
 public class RandomStringGenerator {
 
+    /**
+     *
+     * @param length
+     * @return
+     */
     public static String generate(int length) {
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'
