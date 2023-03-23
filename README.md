@@ -2,7 +2,7 @@
 No dependencies. These are a couple of helper java classes I often use in my projects. They are written with a preference for speed of execution. Here are some that you might find most useful:  
 
 ## Release
-Release as a Maven artifact is attempted with a new versioning starting at 0.10
+Release as a Maven artifact is attempted with a new versioning starting at 0.11
 
 ### Clock.java
 A simple way to measure the execution time of part of your code, not for benchmark but to read in your logs. Outputs to System.out
