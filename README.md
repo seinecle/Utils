@@ -1,6 +1,8 @@
 # Utils classes 
 No dependencies. These are a couple of helper java classes I often use in my projects. They are written with a preference for speed of execution. Here are some that you might find most useful:  
 
+## Release
+Release as a Maven artifact is attempted with a new versioning starting at 0.10
 
 ### Clock.java
 A simple way to measure the execution time of part of your code, not for benchmark but to read in your logs. Outputs to System.out
@@ -12,7 +14,7 @@ Convenience class replacing the Multiset by Guava (when I realized I imported Gu
 USeful to count all co-occurrences in a set of elements. Not multithreaded but still very optimized.
 
 ### License
-Copyright 2016 Clement Levallois
+Copyright 2016-2023 Clement Levallois
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
