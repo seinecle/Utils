@@ -2,7 +2,7 @@
 @packages
 @argfile
 --module-path
-'C:/Users/levallois/open/Utils/target/utils-core-0.11.jar'
+'C:/Users/levallois/open/Utils/target/utils-core-0.12.jar'
 --patch-module
 net.clementlevallois.utils='C:/Users/levallois/open/Utils/src/main/java;C:/Users/levallois/open/Utils/target/generated-sources/annotations'
 -encoding
@@ -22,30 +22,29 @@ net.clementlevallois.utils='C:/Users/levallois/open/Utils/src/main/java;C:/Users
 -docencoding
 'UTF-8'
 -doctitle
-'Utils from Clement Levallois 0.11 API'
+'Utils from Clement Levallois 0.12 API'
 -linkoffline
 'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/levallois/open/Utils/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
-'Utils from Clement Levallois 0.11 API'
+'Utils from Clement Levallois 0.12 API'
 net.clementlevallois.utils
 'C:/Users/levallois/open/Utils/src/main/java/module-info.java'
-C:\Users\levallois\open\Utils\target\apidocs\allclasses-index.html = 1679580487652
-C:\Users\levallois\open\Utils\target\apidocs\allpackages-index.html = 1679580487664
-C:\Users\levallois\open\Utils\target\apidocs\deprecated-list.html = 1679576362330
-C:\Users\levallois\open\Utils\target\apidocs\element-list = 1679580487041
-C:\Users\levallois\open\Utils\target\apidocs\help-doc.html = 1679580487986
-C:\Users\levallois\open\Utils\target\apidocs\index-all.html = 1679580487719
-C:\Users\levallois\open\Utils\target\apidocs\index.html = 1679580487980
-C:\Users\levallois\open\Utils\target\apidocs\jquery-ui.overrides.css = 1679580488304
-C:\Users\levallois\open\Utils\target\apidocs\member-search-index.js = 1679580487685
-C:\Users\levallois\open\Utils\target\apidocs\module-search-index.js = 1679580487671
-C:\Users\levallois\open\Utils\target\apidocs\overview-tree.html = 1679580487625
-C:\Users\levallois\open\Utils\target\apidocs\package-search-index.js = 1679580487676
-C:\Users\levallois\open\Utils\target\apidocs\script.js = 1679580488234
-C:\Users\levallois\open\Utils\target\apidocs\search.js = 1679580488241
-C:\Users\levallois\open\Utils\target\apidocs\serialized-form.html = 1679580487098
-C:\Users\levallois\open\Utils\target\apidocs\stylesheet.css = 1679580488229
-C:\Users\levallois\open\Utils\target\apidocs\tag-search-index.js = 1679580487691
-C:\Users\levallois\open\Utils\target\apidocs\type-search-index.js = 1679580487679
+C:\Users\levallois\open\Utils\target\apidocs\allclasses-index.html = 1679993263011
+C:\Users\levallois\open\Utils\target\apidocs\allpackages-index.html = 1679993263021
+C:\Users\levallois\open\Utils\target\apidocs\element-list = 1679993262238
+C:\Users\levallois\open\Utils\target\apidocs\help-doc.html = 1679993263102
+C:\Users\levallois\open\Utils\target\apidocs\index-all.html = 1679993263067
+C:\Users\levallois\open\Utils\target\apidocs\index.html = 1679993263096
+C:\Users\levallois\open\Utils\target\apidocs\jquery-ui.overrides.css = 1679993263182
+C:\Users\levallois\open\Utils\target\apidocs\member-search-index.js = 1679993263038
+C:\Users\levallois\open\Utils\target\apidocs\module-search-index.js = 1679993263026
+C:\Users\levallois\open\Utils\target\apidocs\overview-tree.html = 1679993262986
+C:\Users\levallois\open\Utils\target\apidocs\package-search-index.js = 1679993263030
+C:\Users\levallois\open\Utils\target\apidocs\script.js = 1679993263114
+C:\Users\levallois\open\Utils\target\apidocs\search.js = 1679993263120
+C:\Users\levallois\open\Utils\target\apidocs\serialized-form.html = 1679993262294
+C:\Users\levallois\open\Utils\target\apidocs\stylesheet.css = 1679993263109
+C:\Users\levallois\open\Utils\target\apidocs\tag-search-index.js = 1679993263044
+C:\Users\levallois\open\Utils\target\apidocs\type-search-index.js = 1679993263033

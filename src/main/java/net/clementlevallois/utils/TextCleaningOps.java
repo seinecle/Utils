@@ -253,7 +253,7 @@ public class TextCleaningOps {
         }
         return cleanedLines;
     }
-    
+
     /**
      *
      * @param input
@@ -301,7 +301,6 @@ public class TextCleaningOps {
     }
 
     // from https://stackoverflow.com/a/15191508/798502
-
     /**
      *
      * @param string
@@ -337,7 +336,7 @@ public class TextCleaningOps {
         int j = 0;
         for (int i = 0, n = string.length(); i < n; ++i) {
             char c = string.charAt(i);
-            if (c <= '\u007F' & c!='\''& c!='’') {
+            if (c <= '\u007F' & c != '\'' & c != '’') {
                 out[j++] = c;
             }
         }
@@ -367,6 +366,38 @@ public class TextCleaningOps {
             status = status.replaceAll(" +", " ");
             status = TextCleaningOps.removePunctuationSigns(status);
             status = TextCleaningOps.flattenToAscii(status);
+            status = status.replaceAll(" +", " ");
+            cleanedLines.put(entry.getKey(), status);
+        }
+        return cleanedLines;
+    }
+
+    /**
+     *
+     * @param mapOfLines
+     * @param removeNonAscii
+     * @return
+     */
+    public static Map<Integer, String> doAllCleaningOps(Map<Integer, String> mapOfLines, boolean removeNonAscii) {
+        Map<Integer, String> cleanedLines = new HashMap();
+        if (mapOfLines == null) {
+            return cleanedLines;
+        }
+
+        for (Map.Entry<Integer, String> entry : mapOfLines.entrySet()) {
+            String status = entry.getValue();
+            if (status == null || status.isBlank()) {
+                cleanedLines.put(entry.getKey(), "");
+                continue;
+            }
+            status = TextCleaningOps.removeUrls(status);
+            status = TextCleaningOps.normalizeApostrophs(status);
+            status = TextCleaningOps.removeNullChars(status);
+            status = status.replaceAll(" +", " ");
+            status = TextCleaningOps.removePunctuationSigns(status);
+            if (removeNonAscii) {
+                status = TextCleaningOps.flattenToAscii(status);
+            }
             status = status.replaceAll(" +", " ");
             cleanedLines.put(entry.getKey(), status);
         }
