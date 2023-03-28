@@ -12,6 +12,9 @@
     </properties>
 
     <name>Utils from Clement Levallois</name>
+    <description>a collection of helper methods in Java</description>
+    <url>https://github.com/seinecle/utils</url>
+    <inceptionYear>2021</inceptionYear>
 
     <dependencies>
         <dependency>
@@ -22,8 +25,6 @@
         </dependency>
     </dependencies>
 
-    <description>a collection of helper methods in Java</description>
-    <url>https://github.com/seinecle/utils</url>
     
     <!-- Licenses -->
     <licenses>
