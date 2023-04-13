@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -52,7 +53,7 @@ public class Multiset
      *
      */
     public Multiset() {
-        internalMap = new HashMap();
+        internalMap = new ConcurrentHashMap();
     }
 
     /**
@@ -60,7 +61,7 @@ public class Multiset
      * @param maxElements
      */
     public Multiset(Integer maxElements) {
-        internalMap = new HashMap();
+        internalMap = new ConcurrentHashMap();
         this.maxElements = maxElements;
 
     }
@@ -77,7 +78,7 @@ public class Multiset
      *
      * @param internalMap
      */
-    public void setInternalMap(Map<T, Integer> internalMap) {
+    public void setInternalMap(ConcurrentHashMap<T, Integer> internalMap) {
         this.internalMap = internalMap;
     }
 

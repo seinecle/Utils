@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.clementlevallois.utils</groupId>
     <artifactId>utils-core</artifactId>
-    <version>0.12</version>
+    <version>0.13</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -89,7 +89,7 @@
                 <altDeploymentRepository>local::file:./target/staging-deploy</altDeploymentRepository>
             </properties>            
             <build>
-                <defaultGoal>deploy</defaultGoal>
+                <defaultGoal>clean deploy</defaultGoal>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
