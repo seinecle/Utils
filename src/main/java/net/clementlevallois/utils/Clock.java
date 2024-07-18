@@ -11,7 +11,7 @@ package net.clementlevallois.utils;
 public class Clock {
 
     private long start;
-    private final String action;
+    private final String actionBeingClocked;
     private StringBuilder logText;
     private StringBuilder intermediateText;
     private final String newLine = "\n";
@@ -24,11 +24,11 @@ public class Clock {
 
     /**
      *
-     * @param action
+     * @param actionThatIsClocked
      */
-    public Clock(String action) {
+    public Clock(String actionThatIsClocked) {
 
-        this.action = action;
+        this.actionBeingClocked = actionThatIsClocked;
         intermediateText = new StringBuilder();
         logText = new StringBuilder();
         if (!silent) {
@@ -42,9 +42,10 @@ public class Clock {
      * @param startSilent
      */
     public Clock(String action, boolean startSilent) {
-        this.action = action;
+        this.actionBeingClocked = action;
         intermediateText = new StringBuilder();
         logText = new StringBuilder();
+        silent = startSilent;
         startClock(startSilent);
     }
 
@@ -54,7 +55,7 @@ public class Clock {
      * @param useTheOutputEnum
      */
     public Clock(String action, Output useTheOutputEnum) {
-        this.action = action;
+        this.actionBeingClocked = action;
         intermediateText = new StringBuilder();
         logText = new StringBuilder();
     }
@@ -62,7 +63,7 @@ public class Clock {
     private void startClock(boolean startSilent) {
 
         start = System.currentTimeMillis();
-        logText.append(action).append("...").append(newLine);
+        logText.append(actionBeingClocked).append("...").append(newLine);
         if (!startSilent) {
             System.out.print(logText.toString());
         }
@@ -74,17 +75,19 @@ public class Clock {
      */
     public String startClockToString() {
         start = System.currentTimeMillis();
-        logText.append(action).append("...").append(newLine);
+        logText.append(actionBeingClocked).append("...").append(newLine);
         return logText.toString();
     }
 
     /**
      *
-     * @param it
+     * @param intermediaryText
      */
-    public void printIntermediaryText(String it) {
-        intermediateText.append(it).append(newLine);
-        System.out.println(intermediateText.toString());
+    public void printIntermediaryText(String intermediaryText) {
+        intermediateText.append(intermediaryText).append(newLine);
+        if (!silent) {
+            System.out.println(intermediateText.toString());
+        }
         intermediateText = new StringBuilder();
     }
 
@@ -112,7 +115,9 @@ public class Clock {
      *
      */
     public void printElapsedTime() {
-        System.out.println(computeElapsedTime());
+        if (!silent) {
+            System.out.println(computeElapsedTime());
+        }
     }
 
     /**
@@ -128,18 +133,18 @@ public class Clock {
         long currentTime = System.currentTimeMillis();
         long elapsedTime = currentTime - start;
 
-        if (elapsedTime < 10000) {
-            int seconds = Math.round(elapsedTime / 1000);
+        if (elapsedTime < 10_000) {
+            int seconds = Math.round(elapsedTime / 1_000);
             if (seconds != 0) {
                 sb.append(String.valueOf(seconds))
                         .append(" seconds, ");
             }
-            sb.append(Math.round(elapsedTime % 1000))
+            sb.append(Math.round(elapsedTime % 1_000))
                     .append(" milliseconds");
-        } else if (elapsedTime < 60000) {
-            sb.append(elapsedTime / 1000).append(" seconds");
+        } else if (elapsedTime < 60_000) {
+            sb.append(elapsedTime / 1_000).append(" seconds");
         } else {
-            sb.append(elapsedTime / 60000).append(" minutes ").append(Math.round((elapsedTime % 60000) / 1000)).append(" seconds");
+            sb.append(elapsedTime / 60000).append(" minutes ").append(Math.round((elapsedTime % 60_000) / 1_000)).append(" seconds");
         }
         return sb.toString();
     }
@@ -148,7 +153,9 @@ public class Clock {
      *
      */
     public void closeAndPrintClock() {
-        System.out.println(writeLogTextClosing(""));
+        if (!silent) {
+            System.out.println(writeLogTextClosing(""));
+        }
     }
 
     /**
@@ -156,7 +163,9 @@ public class Clock {
      * @param closingMessage
      */
     public void closeAndPrintClock(String closingMessage) {
-        System.out.println(writeLogTextClosing(closingMessage));
+        if (!silent) {
+            System.out.println(writeLogTextClosing(closingMessage));
+        }
     }
 
     /**
@@ -172,12 +181,12 @@ public class Clock {
         if (!silent) {
             logText = new StringBuilder();
             logText.append(closingMessage)
-            .append(newLine)
-            .append("finished ")
-            .append(action)
-            .append(". [Duration: ")
-            .append(computeElapsedTime())
-            .append("]");
+                    .append(newLine)
+                    .append("finished ")
+                    .append(actionBeingClocked)
+                    .append(". [Duration: ")
+                    .append(computeElapsedTime())
+                    .append("]");
         }
         return logText.toString();
     }
@@ -187,6 +196,6 @@ public class Clock {
      * @return
      */
     public String getAction() {
-        return action;
+        return actionBeingClocked;
     }
 }

@@ -24,9 +24,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author LEVALLOIS
  * @param <T>
  */
-public class Multiset
-        <T> 
-//        <T extends Comparable<? super T>> 
+public class Multiset<T>
+        //        <T extends Comparable<? super T>> 
         implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -335,21 +334,12 @@ public class Multiset
      * @return
      */
     public List<Map.Entry<T, Integer>> sortDesckeepAboveMinFreq(Multiset<T> multiset, int n) {
-        List<Map.Entry<T, Integer>> toReturn = new ArrayList();
 
         List<Map.Entry<T, Integer>> input = sortDesc(multiset);
 
-        Iterator<Map.Entry<T, Integer>> iterator = input.iterator();
+        input.removeIf(entry -> entry.getValue() <= n);
 
-        Map.Entry<T, Integer> object;
-        while (iterator.hasNext()) {
-            object = iterator.next();
-            if (object.getValue() > n) {
-                toReturn.add(object);
-            }
-
-        }
-        return toReturn;
+        return input;
     }
 
     /**

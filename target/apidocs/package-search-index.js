@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"net.clementlevallois.utils","l":"net.clementlevallois.utils"}];updateSearchResults();
